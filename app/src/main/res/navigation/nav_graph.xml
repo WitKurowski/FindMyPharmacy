@@ -9,12 +9,7 @@
 			android:id="@+id/PharmacyListFragment"
 			android:name="com.wit.findmypharmacy.pharmacy.list.PharmacyListFragment"
 			android:label="@string/pharmacy_list_fragment_label"
-			tools:layout="@layout/fragment_pharmacy_list">
-
-		<action
-				android:id="@+id/action_PharmacyListFragment_to_SecondFragment"
-				app:destination="@id/SecondFragment" />
-	</fragment>
+			tools:layout="@layout/fragment_pharmacy_list" />
 
 	<fragment
 			android:id="@+id/SecondFragment"
