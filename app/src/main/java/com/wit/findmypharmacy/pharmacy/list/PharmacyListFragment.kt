@@ -84,7 +84,8 @@ class PharmacyListFragment : Fragment() {
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 			val context = parent.context
 			val layoutInflater = LayoutInflater.from(context)
-			val pharmacyListItemBinding = PharmacyListItemBinding.inflate(layoutInflater)
+			val pharmacyListItemBinding =
+				PharmacyListItemBinding.inflate(layoutInflater, parent, false)
 			val viewHolder = ViewHolder(pharmacyListItemBinding)
 
 			return viewHolder
