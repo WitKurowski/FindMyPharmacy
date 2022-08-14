@@ -91,6 +91,10 @@ class PharmacyListFragment : Fragment() {
 		}
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+			with(holder.pharmacyListItemBinding) {
+				val pharmacy = getItem(position)
+				name.text = pharmacy.name
+			}
 		}
 
 		private class ItemCallback : DiffUtil.ItemCallback<Pharmacy>() {
@@ -103,7 +107,7 @@ class PharmacyListFragment : Fragment() {
 			}
 		}
 
-		private class ViewHolder(pharmacyListItemBinding: PharmacyListItemBinding) :
+		private class ViewHolder(val pharmacyListItemBinding: PharmacyListItemBinding) :
 				RecyclerView.ViewHolder(pharmacyListItemBinding.root)
 	}
 }
