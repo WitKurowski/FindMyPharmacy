@@ -14,9 +14,9 @@
 			android:theme="@style/Theme.FindMyPharmacy"
 			tools:targetApi="31">
 		<activity
-				android:name=".pharmacy.list.PharmacyListActivity"
+				android:name=".home.HomeActivity"
 				android:exported="true"
-				android:label="@string/title_activity_pharmacy_list"
+				android:label="@string/home"
 				android:theme="@style/Theme.FindMyPharmacy.NoActionBar">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

@@ -1,23 +1,23 @@
-package com.wit.findmypharmacy.pharmacy.list
+package com.wit.findmypharmacy.home
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.snackbar.Snackbar
 import com.wit.findmypharmacy.R
-import com.wit.findmypharmacy.databinding.ActivityPharmacyListBinding
+import com.wit.findmypharmacy.databinding.ActivityHomeBinding
 
-class PharmacyListActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 	private lateinit var appBarConfiguration: AppBarConfiguration
-	private lateinit var binding: ActivityPharmacyListBinding
+	private lateinit var binding: ActivityHomeBinding
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		binding = ActivityPharmacyListBinding.inflate(layoutInflater)
+		binding = ActivityHomeBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
 		setSupportActionBar(binding.toolbar)
@@ -34,7 +34,8 @@ class PharmacyListActivity : AppCompatActivity() {
 
 	override fun onSupportNavigateUp(): Boolean {
 		val navController = findNavController(R.id.nav_host_fragment_content_pharmacy_list)
-		val supportNavigateUp = navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+		val supportNavigateUp =
+			navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 
 		return supportNavigateUp
 	}
