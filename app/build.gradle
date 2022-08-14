@@ -1,6 +1,10 @@
 plugins {
 	id 'com.android.application'
 	id 'org.jetbrains.kotlin.android'
+
+	// Hilt
+	id 'dagger.hilt.android.plugin'
+	id 'kotlin-kapt'
 }
 
 android {
@@ -48,8 +52,25 @@ dependencies {
 	// ConstraintLayout
 	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+	// Eventbus
+	implementation "org.greenrobot:eventbus:3.3.1"
+
+	// Hilt
+	def hilt_version = "2.43.2"
+	implementation "com.google.dagger:hilt-android:$hilt_version"
+	kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
 	// Navigation
 	def navigation_version = "2.5.1"
 	implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
 	implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+	// Retrofit
+	def retrofit_version = "2.9.0"
+	implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+	implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+}
+
+kapt {
+	correctErrorTypes true
 }

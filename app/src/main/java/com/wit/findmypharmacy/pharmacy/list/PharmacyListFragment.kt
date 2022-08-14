@@ -6,11 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.wit.findmypharmacy.databinding.FragmentPharmacyListBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PharmacyListFragment : Fragment() {
 	private var _binding: FragmentPharmacyListBinding? = null
 
 	private val binding get() = _binding!!
+
+	@Inject
+	lateinit var pharmacyListPresenter: PharmacyListPresenter
 
 	override fun onCreateView(
 			inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -24,5 +30,22 @@ class PharmacyListFragment : Fragment() {
 		super.onDestroyView()
 
 		_binding = null
+	}
+
+	override fun onStart() {
+		super.onStart()
+
+		pharmacyListPresenter.register(this)
+		send(StartedEvent)
+	}
+
+	override fun onStop() {
+		super.onStop()
+
+		pharmacyListPresenter.unregister(this)
+	}
+
+	private fun send(event: Event) {
+		pharmacyListPresenter.send(event)
 	}
 }
