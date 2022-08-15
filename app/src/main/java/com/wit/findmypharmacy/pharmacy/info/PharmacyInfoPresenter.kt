@@ -26,7 +26,7 @@ class PharmacyInfoPresenter @Inject constructor(
 		showOrderedMedicationsLabelState(visible = false)
 
 		val pharmacyApiModel = pharmacyRepository.get(pharmacyId)
-		val addressApiModel = pharmacyApiModel.addressApiModel!!
+		val addressApiModel = pharmacyApiModel.addressApiModel
 		val streetNumberAndName = addressApiModel.streetNumberAndName
 		val city = addressApiModel.city
 		val state = addressApiModel.state

@@ -85,7 +85,7 @@ class OrderPresenter @Inject constructor(
 		val pharmacies = pharmacyRepository.get()
 		val results = FloatArray(1)
 		nearestPharmacyApiModel = pharmacies.minByOrNull {
-			val addressApiModel = it.addressApiModel!!
+			val addressApiModel = it.addressApiModel
 			val latitude = addressApiModel.latitude
 			val longitude = addressApiModel.longitude
 			Location.distanceBetween(
