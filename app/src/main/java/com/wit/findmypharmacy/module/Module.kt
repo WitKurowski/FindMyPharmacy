@@ -11,7 +11,7 @@ import org.greenrobot.eventbus.EventBus
 class Module {
 	@Provides
 	fun provideStateEventBus(): EventBus {
-		val stateEventBus = EventBus.getDefault()
+		val stateEventBus = EventBus.builder().build()
 
 		return stateEventBus
 	}

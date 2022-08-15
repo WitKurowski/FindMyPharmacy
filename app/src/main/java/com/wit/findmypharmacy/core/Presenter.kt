@@ -5,7 +5,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 abstract class Presenter<Event, State>(private val stateEventBus: EventBus) {
-	private val eventEventBus = EventBus.getDefault()
+	private val eventEventBus = EventBus.builder().build()
 
 	protected abstract fun on(event: Event)
 
