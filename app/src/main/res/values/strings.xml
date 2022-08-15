@@ -8,7 +8,7 @@
 	<string name="order_already_exists_with_pharmacy">Unable to reorder from the same pharmacy.</string>
 	<string name="ordered_medications_label">Ordered medications:</string>
 	<string name="ordering_from_label">Ordering from:</string>
-	<string name="select_medications">Selection medications:</string>
+	<string name="select_medications">Select medications:</string>
 
 	<!-- Strings used for fragments for navigation -->
 	<string name="order_fragment_label">Order Fragment</string>
