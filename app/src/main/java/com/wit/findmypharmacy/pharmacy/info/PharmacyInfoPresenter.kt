@@ -1,12 +1,15 @@
 package com.wit.findmypharmacy.pharmacy.info
 
 import com.wit.findmypharmacy.core.Presenter
+import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 class PharmacyInfoPresenter @Inject constructor(
-		private val pharmacyRepository: PharmacyRepository, stateEventBus: EventBus
+		private val orderRepository: OrderRepository,
+		private val pharmacyRepository: PharmacyRepository,
+		stateEventBus: EventBus
 ) : Presenter<Event, State>(stateEventBus) {
 	override fun on(event: Event) {
 		when (event) {
@@ -40,5 +43,16 @@ class PharmacyInfoPresenter @Inject constructor(
 		val visible = hours != null && hours.isNotBlank()
 		val updatedHoursLabelState = hoursLabelState.copy(visible = visible)
 		show(updatedHoursLabelState)
+
+		val orderDatabaseModels = orderRepository.get()
+		val matchingOrderDatabaseModels = orderDatabaseModels.find {
+			it.pharmacyApiModelId == pharmacyId
+		}
+
+		if (matchingOrderDatabaseModels != null) {
+			val medications = matchingOrderDatabaseModels.medications
+			val medicationsState = MedicationsState(medications)
+			show(medicationsState)
+		}
 	}
 }

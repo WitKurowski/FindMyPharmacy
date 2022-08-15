@@ -3,62 +3,72 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:paddingHorizontal="@dimen/activity_horizontal_margin"
-		android:paddingVertical="@dimen/activity_vertical_margin">
+		android:layout_height="match_parent">
 
-	<TextView
-			android:id="@+id/name"
-			style="@style/Text.Title"
-			android:layout_width="wrap_content"
+	<LinearLayout
+			android:id="@+id/pharmacy_info_container"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="@dimen/activity_vertical_margin"
+			android:orientation="vertical"
+			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			tools:lines="2"
-			tools:text="@tools:sample/lorem/random" />
+			app:layout_constraintTop_toTopOf="parent">
 
-	<TextView
-			android:id="@+id/address"
-			style="@style/Text.Subtitle"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="4dp"
-			android:layout_marginTop="4dp"
+		<TextView
+				android:id="@+id/name"
+				style="@style/Text.Title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				tools:lines="2"
+				tools:text="@tools:sample/lorem/random" />
+
+		<TextView
+				android:id="@+id/address"
+				style="@style/Text.Subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="4dp"
+				android:layout_marginTop="4dp"
+				tools:lines="2"
+				tools:text="@tools:sample/lorem/random" />
+
+		<TextView
+				android:id="@+id/phone_number"
+				style="@style/Text.Subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="4dp"
+				android:layout_marginTop="4dp"
+				tools:text="+1-888-987-6543" />
+
+		<TextView
+				android:id="@+id/hours_label"
+				style="@style/Text.Subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="4dp"
+				android:layout_marginTop="4dp"
+				android:labelFor="@id/hours_label"
+				android:text="@string/hours_label" />
+
+		<TextView
+				android:id="@+id/hours"
+				style="@style/Text.Subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="4dp"
+				tools:text="9:00am-7:00pm Mon-Fri\n9:00a - 5:00p Sat\n10:00a- 5:00p Sun" />
+	</LinearLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/medications"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginTop="8dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/name"
-			tools:lines="2"
-			tools:text="@tools:sample/lorem/random" />
-
-	<TextView
-			android:id="@+id/phone_number"
-			style="@style/Text.Subtitle"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="4dp"
-			android:layout_marginTop="4dp"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/address"
-			tools:text="+1-888-987-6543" />
-
-	<TextView
-			android:id="@+id/hours_label"
-			style="@style/Text.Subtitle"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="4dp"
-			android:layout_marginTop="4dp"
-			android:labelFor="@id/hours_label"
-			android:text="@string/hours_label"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/phone_number" />
-
-	<TextView
-			android:id="@+id/hours"
-			style="@style/Text.Subtitle"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="4dp"
-			app:layout_constraintStart_toEndOf="@id/hours_label"
-			app:layout_constraintTop_toTopOf="@id/hours_label"
-			tools:text="9:00am-7:00pm Mon-Fri \n 9:00a - 5:00p Sat \n 10:00a- 5:00p Sun" />
+			app:layout_constraintTop_toBottomOf="@id/pharmacy_info_container" />
 </androidx.constraintlayout.widget.ConstraintLayout>

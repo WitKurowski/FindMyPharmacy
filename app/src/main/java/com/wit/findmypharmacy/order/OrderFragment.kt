@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.*
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentOrderBinding
-import com.wit.findmypharmacy.databinding.MedicationListItemBinding
+import com.wit.findmypharmacy.databinding.MedicationListItemCheckableBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -96,15 +96,15 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 			val context = parent.context
 			val layoutInflater = LayoutInflater.from(context)
-			val medicationListItemBinding =
-				MedicationListItemBinding.inflate(layoutInflater, parent, false)
-			val viewHolder = ViewHolder(medicationListItemBinding)
+			val medicationListItemCheckableBinding =
+				MedicationListItemCheckableBinding.inflate(layoutInflater, parent, false)
+			val viewHolder = ViewHolder(medicationListItemCheckableBinding)
 
 			return viewHolder
 		}
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-			with(holder.medicationListItemBinding) {
+			with(holder.medicationListItemCheckableBinding) {
 				with(name) {
 					val medicationUiState = getItem(position)
 					val name = medicationUiState.name
@@ -136,7 +136,7 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 			}
 		}
 
-		private class ViewHolder(val medicationListItemBinding: MedicationListItemBinding) :
-				RecyclerView.ViewHolder(medicationListItemBinding.root)
+		private class ViewHolder(val medicationListItemCheckableBinding: MedicationListItemCheckableBinding) :
+				RecyclerView.ViewHolder(medicationListItemCheckableBinding.root)
 	}
 }
