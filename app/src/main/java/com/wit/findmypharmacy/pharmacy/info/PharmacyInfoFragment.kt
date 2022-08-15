@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.databinding.FragmentPharmacyInfoBinding
 
 class PharmacyInfoFragment : Fragment() {
@@ -26,13 +24,5 @@ class PharmacyInfoFragment : Fragment() {
 		super.onDestroyView()
 
 		_binding = null
-	}
-
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
-
-		binding.buttonSecond.setOnClickListener {
-			findNavController().navigate(R.id.action_pharmacy_info_fragment_to_pharmacy_list_fragment)
-		}
 	}
 }
