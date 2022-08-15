@@ -15,6 +15,7 @@ class OrderPresenter @Inject constructor(
 	}
 
 	private fun onStartedEvent() {
-		medicationRepository.get()
+		val medications = medicationRepository.get()
+		show(MedicationsState(medications))
 	}
 }
