@@ -7,5 +7,8 @@ data class PharmacyApiModel(
 		@SerializedName("id") val id: String,
 		@SerializedName("name") val name: String
 ) {
-	data class AddressApiModel(@SerializedName("streetAddress1") val streetNumberAndName: String)
+	data class AddressApiModel(
+			@SerializedName("city") val city: String,
+			@SerializedName("streetAddress1") val streetNumberAndName: String
+	)
 }

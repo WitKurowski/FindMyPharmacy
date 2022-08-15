@@ -18,7 +18,8 @@ class PharmacyInfoPresenter @Inject constructor(
 		val pharmacy = pharmacyRepository.get(pharmacyId)
 		val addressApiModel = pharmacy.addressApiModel!!
 		val streetNumberAndName = addressApiModel.streetNumberAndName
-		val address = streetNumberAndName
+		val city = addressApiModel.city
+		val address = streetNumberAndName + "\n" + city
 		val name = pharmacy.name
 		val pharmacyState = PharmacyState(address, name)
 		show(pharmacyState)
