@@ -36,8 +36,8 @@ class PharmacyInfoPresenter @Inject constructor(
 
 		// Replace needed because some of the hour strings have "\n" as two characters rather than
 		// the '\n' character.
-		// TODO: Remove whitespace around newlines
-		val hours = pharmacyApiModel.hours?.replace("\\n", "\n")
+		val newLineStringWithWhitespaceRegex = Regex("\\s*\\\\n\\s*")
+		val hours = pharmacyApiModel.hours?.replace(newLineStringWithWhitespaceRegex, "\n")
 
 		val name = pharmacyApiModel.name
 		val phoneNumber = pharmacyApiModel.phoneNumber!!
