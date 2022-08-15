@@ -9,6 +9,7 @@ data class PharmacyApiModel(
 ) {
 	data class AddressApiModel(
 			@SerializedName("city") val city: String,
+			@SerializedName("usTerritory") val state: String,
 			@SerializedName("streetAddress1") val streetNumberAndName: String
 	)
 }
