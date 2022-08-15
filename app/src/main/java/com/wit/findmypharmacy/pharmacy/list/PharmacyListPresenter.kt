@@ -18,6 +18,8 @@ class PharmacyListPresenter @Inject constructor(
 	}
 
 	private fun onStartedEvent() {
+		showProgressIndicatorState(visible = true)
+
 		// TODO: Perform these 2 calls simultaneously with coroutines
 		val pharmacies = pharmacyRepository.get()
 		val orders = orderRepository.get()
@@ -30,7 +32,13 @@ class PharmacyListPresenter @Inject constructor(
 			PharmacyUiState(checked, id, name)
 		}
 		val pharmaciesState = PharmaciesState(pharmacyUiStates)
-
 		show(pharmaciesState)
+
+		showProgressIndicatorState(visible = false)
+	}
+
+	private fun showProgressIndicatorState(visible: Boolean) {
+		val progressIndicatorState = ProgressIndicatorState(visible)
+		show(progressIndicatorState)
 	}
 }

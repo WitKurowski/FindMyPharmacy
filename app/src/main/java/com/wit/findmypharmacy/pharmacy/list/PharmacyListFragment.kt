@@ -59,11 +59,16 @@ class PharmacyListFragment :
 	override fun show(state: State) {
 		when (state) {
 			is PharmaciesState -> showPharmaciesState(state.pharmacyUiStates)
+			is ProgressIndicatorState -> showProgressIndicatorState(state.visible)
 		}
 	}
 
 	private fun showPharmaciesState(pharmacyApiModels: List<PharmacyUiState>) {
 		pharmacyAdapter.submitList(pharmacyApiModels)
+	}
+
+	private fun showProgressIndicatorState(visible: Boolean) {
+		binding.progressIndicator.isVisible = visible
 	}
 
 	private class PharmacyAdapter(private val onPharmacyClicked: (String) -> Unit) :
