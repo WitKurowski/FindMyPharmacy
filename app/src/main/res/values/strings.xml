@@ -1,6 +1,7 @@
 <resources>
 	<string name="app_name">Find My Pharmacy</string>
 	<string name="home">Home</string>
+	<string name="hours_label">Hours: </string>
 
 	<!-- Strings used for fragments for navigation -->
 	<string name="pharmacy_list_fragment_label">Pharmacy List Fragment</string>

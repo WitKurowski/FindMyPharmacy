@@ -9,10 +9,10 @@ class PharmacyRepository @Inject constructor(private val pharmacyApi: PharmacyAp
 	fun get(): List<PharmacyApiModel> {
 		// TODO: Retrieve from file instead
 		val pharmacies = listOf(
-				PharmacyApiModel(null, "NRxPh-HLRS", "ReCept", null),
-				PharmacyApiModel(null, "NRxPh-BAC1", "My Community Pharmacy", null),
-				PharmacyApiModel(null, "NRxPh-SJC1", "MedTime Pharmacy", null),
-				PharmacyApiModel(null, "NRxPh-ZEREiaYq", "NY Pharmacy", null)
+				PharmacyApiModel(null, null, "NRxPh-HLRS", "ReCept", null),
+				PharmacyApiModel(null, null, "NRxPh-BAC1", "My Community Pharmacy", null),
+				PharmacyApiModel(null, null, "NRxPh-SJC1", "MedTime Pharmacy", null),
+				PharmacyApiModel(null, null, "NRxPh-ZEREiaYq", "NY Pharmacy", null)
 		)
 
 		return pharmacies

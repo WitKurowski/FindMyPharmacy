@@ -39,4 +39,26 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/address"
 			tools:text="+1-888-987-6543" />
+
+	<TextView
+			android:id="@+id/hours_label"
+			style="@style/Text.Subtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="4dp"
+			android:labelFor="@id/hours_label"
+			android:text="@string/hours_label"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/phone_number" />
+
+	<TextView
+			android:id="@+id/hours"
+			style="@style/Text.Subtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="4dp"
+			app:layout_constraintStart_toEndOf="@id/hours_label"
+			app:layout_constraintTop_toTopOf="@id/hours_label"
+			tools:text="9:00am-7:00pm Mon-Fri \n 9:00a - 5:00p Sat \n 10:00a- 5:00p Sun" />
 </androidx.constraintlayout.widget.ConstraintLayout>

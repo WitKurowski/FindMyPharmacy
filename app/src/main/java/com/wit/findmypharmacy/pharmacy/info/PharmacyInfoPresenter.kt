@@ -23,9 +23,15 @@ class PharmacyInfoPresenter @Inject constructor(
 		// Note: This format could be extracted out for reuse and for localization.
 		val zipCode = addressApiModel.zipCode
 		val address = "$streetNumberAndName\n$city, $state\n$zipCode"
+
+		// Replace needed because some of the hour strings have "\n" as two characters rather than
+		// the '\n' character.
+		// TODO: Remove whitespace around newlines
+		val hours = pharmacyApiModel.hours?.replace("\\n", "\n")
+
 		val name = pharmacyApiModel.name
 		val phoneNumber = pharmacyApiModel.phoneNumber!!
-		val pharmacyState = PharmacyState(address, name, phoneNumber)
+		val pharmacyState = PharmacyState(address, hours, name, phoneNumber)
 		show(pharmacyState)
 	}
 }
