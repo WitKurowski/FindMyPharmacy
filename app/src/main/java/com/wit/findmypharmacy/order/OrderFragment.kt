@@ -15,6 +15,12 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 			layoutInflater: LayoutInflater, container: ViewGroup?
 	): FragmentOrderBinding = FragmentOrderBinding.inflate(layoutInflater, container, false)
 
+	override fun onStart() {
+		super.onStart()
+
+		send(StartedEvent)
+	}
+
 	override fun show(state: State) {
 	}
 }
