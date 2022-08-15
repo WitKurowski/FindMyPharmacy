@@ -9,7 +9,7 @@
 
 	<TextView
 			android:id="@+id/name"
-			style="@style/Text.Title"
+			style="@style/Text.ListTitle"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			tools:lines="4"

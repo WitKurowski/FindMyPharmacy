@@ -30,6 +30,11 @@ class PharmacyInfoFragment :
 
 	override fun show(state: State) {
 		when (state) {
+			is PharmacyState -> showPharmacyState(state.name)
 		}
+	}
+
+	private fun showPharmacyState(name: String) {
+		binding.name.text = name
 	}
 }
