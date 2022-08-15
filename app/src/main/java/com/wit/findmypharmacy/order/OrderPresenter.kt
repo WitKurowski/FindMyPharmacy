@@ -1,6 +1,7 @@
 package com.wit.findmypharmacy.order
 
 import android.location.Location
+import androidx.annotation.StringRes
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Presenter
 import com.wit.findmypharmacy.model.PharmacyApiModel
@@ -40,8 +41,7 @@ class OrderPresenter @Inject constructor(
 		}
 
 		if (previousOrderFromPharmacyExists) {
-			val toastState = ToastState(R.string.order_already_exists_with_pharmacy)
-			show(toastState)
+			showToastState(R.string.order_already_exists_with_pharmacy)
 		} else {
 			val hasMedicationsSelected = medicationUiStates.any {
 				it.checked
@@ -57,10 +57,11 @@ class OrderPresenter @Inject constructor(
 				}
 				orderRepository.order(pharmacyApiModelId, checkedMedications)
 
+				showToastState(R.string.successfully_submitted_order)
+
 				show(PharmacyListState)
 			} else {
-				val toastState = ToastState(R.string.no_medications_selected)
-				show(toastState)
+				showToastState(R.string.no_medications_selected)
 			}
 		}
 	}
@@ -120,5 +121,10 @@ class OrderPresenter @Inject constructor(
 	private fun showProgressIndicatorState(visible: Boolean) {
 		val progressIndicatorState = ProgressIndicatorState(visible)
 		show(progressIndicatorState)
+	}
+
+	private fun showToastState(@StringRes messageStringResId: Int) {
+		val toastState = ToastState(messageStringResId)
+		show(toastState)
 	}
 }
