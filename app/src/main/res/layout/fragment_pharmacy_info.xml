@@ -29,7 +29,7 @@
 				style="@style/Text.Subtitle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="4dp"
+				android:layout_marginStart="8dp"
 				android:layout_marginTop="4dp"
 				tools:lines="2"
 				tools:text="@tools:sample/lorem/random" />
@@ -39,7 +39,7 @@
 				style="@style/Text.Subtitle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="4dp"
+				android:layout_marginStart="8dp"
 				android:layout_marginTop="4dp"
 				tools:text="+1-888-987-6543" />
 
@@ -48,7 +48,7 @@
 				style="@style/Text.Subtitle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="4dp"
+				android:layout_marginStart="8dp"
 				android:layout_marginTop="4dp"
 				android:labelFor="@id/hours_label"
 				android:text="@string/hours_label" />
@@ -58,8 +58,16 @@
 				style="@style/Text.Subtitle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="4dp"
+				android:layout_marginStart="8dp"
 				tools:text="9:00am-7:00pm Mon-Fri\n9:00a - 5:00p Sat\n10:00a- 5:00p Sun" />
+
+		<TextView
+				android:id="@+id/ordered_medications_label"
+				style="@style/Text.Subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="16dp"
+				android:text="@string/ordered_medications_label" />
 	</LinearLayout>
 
 	<androidx.recyclerview.widget.RecyclerView
@@ -70,5 +78,6 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/pharmacy_info_container" />
+			app:layout_constraintTop_toBottomOf="@id/pharmacy_info_container"
+			tools:listitem="@layout/medication_list_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

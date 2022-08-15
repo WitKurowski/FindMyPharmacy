@@ -21,6 +21,9 @@ class PharmacyInfoPresenter @Inject constructor(
 		val hoursLabelState = HoursLabelState(visible = false)
 		show(hoursLabelState)
 
+		val orderedMedicationsLabelState = OrderedMedicationsLabelState(visible = false)
+		show(orderedMedicationsLabelState)
+
 		val pharmacyApiModel = pharmacyRepository.get(pharmacyId)
 		val addressApiModel = pharmacyApiModel.addressApiModel!!
 		val streetNumberAndName = addressApiModel.streetNumberAndName
@@ -53,6 +56,9 @@ class PharmacyInfoPresenter @Inject constructor(
 			val medications = matchingOrderDatabaseModels.medications
 			val medicationsState = MedicationsState(medications)
 			show(medicationsState)
+
+			val orderedMedicationsLabelState = OrderedMedicationsLabelState(visible = true)
+			show(orderedMedicationsLabelState)
 		}
 	}
 }

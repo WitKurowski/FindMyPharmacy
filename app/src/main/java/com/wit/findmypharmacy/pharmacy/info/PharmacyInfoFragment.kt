@@ -52,6 +52,7 @@ class PharmacyInfoFragment :
 		when (state) {
 			is HoursLabelState -> showHoursLabelState(state.visible)
 			is MedicationsState -> showMedicationsState(state.names)
+			is OrderedMedicationsLabelState -> showOrderedMedicationsLabelState(state.visible)
 			is PharmacyState -> showPharmacyState(
 					state.address, state.hours, state.name, state.phoneNumber
 			)
@@ -64,6 +65,10 @@ class PharmacyInfoFragment :
 
 	private fun showMedicationsState(names: List<String>) {
 		medicationAdapter.submitList(names)
+	}
+
+	private fun showOrderedMedicationsLabelState(visible: Boolean) {
+		binding.orderedMedicationsLabel.isVisible = visible
 	}
 
 	private fun showPharmacyState(
