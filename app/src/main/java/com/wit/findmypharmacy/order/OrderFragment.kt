@@ -2,12 +2,10 @@ package com.wit.findmypharmacy.order
 
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentOrderBinding
@@ -52,6 +50,10 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 
 		with(binding.medications) {
 			adapter = medicationAdapter
+
+			val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.VERTICAL)
+			addItemDecoration(dividerItemDecoration)
+
 			layoutManager = LinearLayoutManager(context)
 		}
 	}

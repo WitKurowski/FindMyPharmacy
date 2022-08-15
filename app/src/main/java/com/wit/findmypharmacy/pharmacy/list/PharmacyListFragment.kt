@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentPharmacyListBinding
 import com.wit.findmypharmacy.databinding.PharmacyListItemBinding
@@ -43,6 +41,10 @@ class PharmacyListFragment :
 		with(binding) {
 			with(pharmacies) {
 				adapter = pharmacyAdapter
+
+				val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.VERTICAL)
+				addItemDecoration(dividerItemDecoration)
+
 				layoutManager = LinearLayoutManager(context)
 			}
 
