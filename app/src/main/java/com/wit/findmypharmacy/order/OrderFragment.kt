@@ -3,6 +3,8 @@ package com.wit.findmypharmacy.order
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -68,6 +70,7 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 			is MedicationsState -> showMedicationsState(state.medicationUiStates)
 			PharmacyListState -> showPharmacyListState()
 			is PharmacyNameState -> showPharmacyNameState(state.name)
+			is ToastState -> showToastState(state.messageStringResId)
 		}
 	}
 
@@ -82,6 +85,10 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 
 	private fun showPharmacyNameState(name: String) {
 		binding.pharmacyName.text = name
+	}
+
+	private fun showToastState(@StringRes messageStringResId: Int) {
+		Toast.makeText(context, messageStringResId, Toast.LENGTH_LONG).show()
 	}
 
 	private class MedicationAdapter(private val onMedicationClicked: (String, Boolean) -> Unit) :

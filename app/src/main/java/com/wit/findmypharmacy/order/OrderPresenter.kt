@@ -1,6 +1,7 @@
 package com.wit.findmypharmacy.order
 
 import android.location.Location
+import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Presenter
 import com.wit.findmypharmacy.model.PharmacyApiModel
 import com.wit.findmypharmacy.repository.MedicationRepository
@@ -33,16 +34,25 @@ class OrderPresenter @Inject constructor(
 	}
 
 	private fun onCheckOutClicked() {
-		val pharmacyApiModelId = nearestPharmacyApiModel.id
-		val checkedMedicationUiStates = medicationUiStates.filter {
+		val hasMedicationsSelected = medicationUiStates.any {
 			it.checked
 		}
-		val checkedMedications = checkedMedicationUiStates.map {
-			it.name
-		}
-		orderRepository.order(pharmacyApiModelId, checkedMedications)
 
-		show(PharmacyListState)
+		if (hasMedicationsSelected) {
+			val pharmacyApiModelId = nearestPharmacyApiModel.id
+			val checkedMedicationUiStates = medicationUiStates.filter {
+				it.checked
+			}
+			val checkedMedications = checkedMedicationUiStates.map {
+				it.name
+			}
+			orderRepository.order(pharmacyApiModelId, checkedMedications)
+
+			show(PharmacyListState)
+		} else {
+			val toastState = ToastState(R.string.no_medications_selected)
+			show(toastState)
+		}
 	}
 
 	private fun onMedicationClicked(name: String, checked: Boolean) {

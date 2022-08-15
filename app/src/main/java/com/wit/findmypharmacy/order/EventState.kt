@@ -1,5 +1,7 @@
 package com.wit.findmypharmacy.order
 
+import androidx.annotation.StringRes
+
 sealed class Event
 
 object CheckOutClicked : Event()
@@ -17,3 +19,5 @@ data class MedicationUiState(val checked: Boolean, val name: String)
 object PharmacyListState : State()
 
 data class PharmacyNameState(val name: String) : State()
+
+data class ToastState(@StringRes val messageStringResId: Int) : State()
