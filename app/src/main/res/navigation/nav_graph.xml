@@ -12,13 +12,13 @@
 			tools:layout="@layout/fragment_pharmacy_list" />
 
 	<fragment
-			android:id="@+id/SecondFragment"
-			android:name="com.wit.findmypharmacy.pharmacy.list.SecondFragment"
-			android:label="@string/second_fragment_label"
-			tools:layout="@layout/fragment_second">
+			android:id="@+id/pharmacy_info_fragment"
+			android:name="com.wit.findmypharmacy.pharmacy.info.PharmacyInfoFragment"
+			android:label="@string/pharmacy_info_fragment_label"
+			tools:layout="@layout/fragment_pharmacy_info">
 
 		<action
-				android:id="@+id/action_SecondFragment_to_PharmacyListFragment"
+				android:id="@+id/action_pharmacy_info_fragment_to_pharmacy_list_fragment"
 				app:destination="@id/PharmacyListFragment" />
 	</fragment>
 </navigation>
