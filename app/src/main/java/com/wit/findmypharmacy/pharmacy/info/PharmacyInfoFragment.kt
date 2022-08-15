@@ -56,6 +56,7 @@ class PharmacyInfoFragment :
 			is PharmacyState -> showPharmacyState(
 					state.address, state.hours, state.name, state.phoneNumber
 			)
+			is ProgressIndicatorState -> showProgressIndicatorState(state.visible)
 		}
 	}
 
@@ -80,6 +81,10 @@ class PharmacyInfoFragment :
 			this.name.text = name
 			this.phoneNumber.text = phoneNumber
 		}
+	}
+
+	private fun showProgressIndicatorState(visible: Boolean) {
+		binding.progressIndicator.isVisible = visible
 	}
 
 	private class MedicationAdapter :

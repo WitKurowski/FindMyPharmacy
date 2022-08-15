@@ -18,11 +18,12 @@ class PharmacyInfoPresenter @Inject constructor(
 	}
 
 	private fun onStartedEvent(pharmacyId: String) {
+		showProgressIndicatorState(visible = true)
+
 		val hoursLabelState = HoursLabelState(visible = false)
 		show(hoursLabelState)
 
-		val orderedMedicationsLabelState = OrderedMedicationsLabelState(visible = false)
-		show(orderedMedicationsLabelState)
+		showOrderedMedicationsLabelState(visible = false)
 
 		val pharmacyApiModel = pharmacyRepository.get(pharmacyId)
 		val addressApiModel = pharmacyApiModel.addressApiModel!!
@@ -57,8 +58,19 @@ class PharmacyInfoPresenter @Inject constructor(
 			val medicationsState = MedicationsState(medications)
 			show(medicationsState)
 
-			val orderedMedicationsLabelState = OrderedMedicationsLabelState(visible = true)
-			show(orderedMedicationsLabelState)
+			showOrderedMedicationsLabelState(visible = true)
 		}
+
+		showProgressIndicatorState(visible = false)
+	}
+
+	private fun showOrderedMedicationsLabelState(visible: Boolean) {
+		val orderedMedicationsLabelState = OrderedMedicationsLabelState(visible)
+		show(orderedMedicationsLabelState)
+	}
+
+	private fun showProgressIndicatorState(visible: Boolean) {
+		val progressIndicatorState = ProgressIndicatorState(visible)
+		show(progressIndicatorState)
 	}
 }
