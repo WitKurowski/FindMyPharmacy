@@ -2,6 +2,8 @@ package com.wit.findmypharmacy.order
 
 sealed class Event
 
+object CheckOutClicked : Event()
+
 data class MedicationClicked(val medication: String, val checked: Boolean) : Event()
 
 object StartedEvent : Event()

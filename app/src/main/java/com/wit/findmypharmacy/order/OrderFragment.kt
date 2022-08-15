@@ -26,6 +26,10 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+				if (menuItem.itemId == R.id.check_out) {
+					send(CheckOutClicked)
+				}
+
 				return true
 			}
 		}, viewLifecycleOwner, Lifecycle.State.RESUMED)
