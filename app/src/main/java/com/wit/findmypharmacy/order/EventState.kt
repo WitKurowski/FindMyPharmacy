@@ -20,4 +20,6 @@ object PharmacyListState : State()
 
 data class PharmacyNameState(val name: String) : State()
 
+data class ProgressIndicatorState(val visible: Boolean) : State()
+
 data class ToastState(@StringRes val messageStringResId: Int) : State()

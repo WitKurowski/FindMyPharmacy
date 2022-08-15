@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
@@ -70,6 +71,7 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 			is MedicationsState -> showMedicationsState(state.medicationUiStates)
 			PharmacyListState -> showPharmacyListState()
 			is PharmacyNameState -> showPharmacyNameState(state.name)
+			is ProgressIndicatorState -> showProgressIndicatorState(state.visible)
 			is ToastState -> showToastState(state.messageStringResId)
 		}
 	}
@@ -85,6 +87,10 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 
 	private fun showPharmacyNameState(name: String) {
 		binding.pharmacyName.text = name
+	}
+
+	private fun showProgressIndicatorState(visible: Boolean) {
+		binding.progressIndicator.isVisible = visible
 	}
 
 	private fun showToastState(@StringRes messageStringResId: Int) {

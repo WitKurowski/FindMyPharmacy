@@ -79,6 +79,8 @@ class OrderPresenter @Inject constructor(
 	}
 
 	private fun onStartedEvent() {
+		showProgressIndicatorState(visible = true)
+
 		val pharmacies = pharmacyRepository.get()
 		val results = FloatArray(1)
 		nearestPharmacyApiModel = pharmacies.minByOrNull {
@@ -106,10 +108,17 @@ class OrderPresenter @Inject constructor(
 		}
 
 		showMedicationsState()
+
+		showProgressIndicatorState(visible = false)
 	}
 
 	private fun showMedicationsState() {
 		val medicationsState = MedicationsState(medicationUiStates)
 		show(medicationsState)
+	}
+
+	private fun showProgressIndicatorState(visible: Boolean) {
+		val progressIndicatorState = ProgressIndicatorState(visible)
+		show(progressIndicatorState)
 	}
 }
