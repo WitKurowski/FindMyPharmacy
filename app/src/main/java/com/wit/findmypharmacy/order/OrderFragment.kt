@@ -61,6 +61,8 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 		}
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+			val name = getItem(position)
+			holder.medicationListItemBinding.name.text = name
 		}
 
 		private class ItemCallback : DiffUtil.ItemCallback<String>() {
@@ -77,7 +79,7 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 			}
 		}
 
-		private class ViewHolder(medicationListItemBinding: MedicationListItemBinding) :
+		private class ViewHolder(val medicationListItemBinding: MedicationListItemBinding) :
 				RecyclerView.ViewHolder(medicationListItemBinding.root)
 	}
 }
