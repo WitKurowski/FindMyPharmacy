@@ -4,59 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wit.findmypharmacy.R
+import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentPharmacyListBinding
 import com.wit.findmypharmacy.databinding.PharmacyListItemBinding
 import com.wit.findmypharmacy.model.Pharmacy
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class PharmacyListFragment : Fragment() {
-	private var _binding: FragmentPharmacyListBinding? = null
-
-	private val binding get() = _binding!!
-
+class PharmacyListFragment :
+		Fragment<FragmentPharmacyListBinding, PharmacyListPresenter, Event, State>() {
 	private val pharmacyAdapter = PharmacyAdapter {
 		findNavController().navigate(R.id.action_pharmacy_list_fragment_to_pharmacy_details_fragment)
 	}
 
-	@Inject
-	lateinit var pharmacyListPresenter: PharmacyListPresenter
+	override fun getBindingRootView(): View = binding.root
 
-	override fun onCreateView(
-			inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-	): View {
-		_binding = FragmentPharmacyListBinding.inflate(inflater, container, false)
-
-		return binding.root
-	}
-
-	override fun onDestroyView() {
-		super.onDestroyView()
-
-		_binding = null
-	}
+	override fun inflateBinding(
+			layoutInflater: LayoutInflater, container: ViewGroup?
+	): FragmentPharmacyListBinding =
+		FragmentPharmacyListBinding.inflate(layoutInflater, container, false)
 
 	override fun onStart() {
 		super.onStart()
 
-		pharmacyListPresenter.register(this)
 		send(StartedEvent)
-	}
-
-	override fun onStop() {
-		super.onStop()
-
-		pharmacyListPresenter.unregister(this)
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,12 +45,7 @@ class PharmacyListFragment : Fragment() {
 		}
 	}
 
-	private fun send(event: Event) {
-		pharmacyListPresenter.send(event)
-	}
-
-	@Subscribe(threadMode = ThreadMode.MAIN)
-	fun show(state: State) {
+	override fun show(state: State) {
 		when (state) {
 			is PharmaciesState -> showPharmaciesState(state.pharmacies)
 		}
