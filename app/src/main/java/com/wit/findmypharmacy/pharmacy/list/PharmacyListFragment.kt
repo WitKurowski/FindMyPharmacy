@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentPharmacyListBinding
 import com.wit.findmypharmacy.databinding.PharmacyListItemBinding
-import com.wit.findmypharmacy.model.PharmacyApiModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,16 +58,16 @@ class PharmacyListFragment :
 
 	override fun show(state: State) {
 		when (state) {
-			is PharmaciesState -> showPharmaciesState(state.pharmacyApiModels)
+			is PharmaciesState -> showPharmaciesState(state.pharmacyUiStates)
 		}
 	}
 
-	private fun showPharmaciesState(pharmacyApiModels: List<PharmacyApiModel>) {
+	private fun showPharmaciesState(pharmacyApiModels: List<PharmacyUiState>) {
 		pharmacyAdapter.submitList(pharmacyApiModels)
 	}
 
 	private class PharmacyAdapter(private val onPharmacyClicked: (String) -> Unit) :
-			ListAdapter<PharmacyApiModel, PharmacyAdapter.ViewHolder>(ItemCallback()) {
+			ListAdapter<PharmacyUiState, PharmacyAdapter.ViewHolder>(ItemCallback()) {
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 			val context = parent.context
 			val layoutInflater = LayoutInflater.from(context)
@@ -83,6 +83,8 @@ class PharmacyListFragment :
 				val pharmacyApiModel = getItem(position)
 				name.text = pharmacyApiModel.name
 
+				hasOrder.isVisible = pharmacyApiModel.checked
+
 				root.setOnClickListener {
 					val id = pharmacyApiModel.id
 					onPharmacyClicked(id)
@@ -90,15 +92,15 @@ class PharmacyListFragment :
 			}
 		}
 
-		private class ItemCallback : DiffUtil.ItemCallback<PharmacyApiModel>() {
+		private class ItemCallback : DiffUtil.ItemCallback<PharmacyUiState>() {
 			override fun areContentsTheSame(
-					oldItem: PharmacyApiModel, newItem: PharmacyApiModel
+					oldItem: PharmacyUiState, newItem: PharmacyUiState
 			): Boolean {
 				return oldItem == newItem
 			}
 
 			override fun areItemsTheSame(
-					oldItem: PharmacyApiModel, newItem: PharmacyApiModel
+					oldItem: PharmacyUiState, newItem: PharmacyUiState
 			): Boolean {
 				return oldItem.id == newItem.id
 			}

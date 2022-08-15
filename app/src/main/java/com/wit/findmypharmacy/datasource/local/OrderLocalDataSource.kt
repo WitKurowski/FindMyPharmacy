@@ -6,9 +6,12 @@ import javax.inject.Singleton
 
 @Singleton
 class OrderLocalDataSource @Inject constructor() {
-	// This would be nicer saved into a Room database, although it would make most sense as a set of
-	// objects from an orders API.
+	// This would be nicer saved into a Room database.
 	private val orders = mutableListOf<OrderDatabaseModel>()
+
+	fun get(): List<OrderDatabaseModel> {
+		return orders
+	}
 
 	fun saveOrder(orderDatabaseModel: OrderDatabaseModel) {
 		orders.add(orderDatabaseModel)
