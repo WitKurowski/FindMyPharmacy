@@ -16,4 +16,14 @@
 			app:layout_constraintTop_toTopOf="parent"
 			tools:lines="2"
 			tools:text="@tools:sample/lorem/random" />
+
+	<TextView
+			android:id="@+id/address"
+			style="@style/Text.Subtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/name"
+			tools:lines="2"
+			tools:text="@tools:sample/lorem/random" />
 </androidx.constraintlayout.widget.ConstraintLayout>
