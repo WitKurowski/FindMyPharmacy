@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentPharmacyListBinding
 import com.wit.findmypharmacy.databinding.PharmacyListItemBinding
@@ -20,7 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class PharmacyListFragment :
 		Fragment<FragmentPharmacyListBinding, PharmacyListPresenter, Event, State>() {
 	private val pharmacyAdapter = PharmacyAdapter {
-		findNavController().navigate(R.id.action_pharmacy_list_fragment_to_pharmacy_details_fragment)
+		val actionPharmacyListFragmentToPharmacyDetailsFragment =
+			PharmacyListFragmentDirections.actionPharmacyListFragmentToPharmacyDetailsFragment(it)
+		findNavController().navigate(
+				actionPharmacyListFragmentToPharmacyDetailsFragment
+		)
 	}
 
 	override fun getBindingRootView(): View = binding.root

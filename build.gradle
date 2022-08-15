@@ -3,6 +3,10 @@ buildscript {
 	dependencies {
 		// Hilt
 		classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
+
+		// Navigation
+		def navigation_version = "2.5.1"
+		classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
 	}
 }
 

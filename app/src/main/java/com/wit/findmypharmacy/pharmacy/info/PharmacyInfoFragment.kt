@@ -1,28 +1,35 @@
 package com.wit.findmypharmacy.pharmacy.info
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentPharmacyInfoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class PharmacyInfoFragment : Fragment() {
-	private var _binding: FragmentPharmacyInfoBinding? = null
+@AndroidEntryPoint
+class PharmacyInfoFragment :
+		Fragment<FragmentPharmacyInfoBinding, PharmacyInfoPresenter, Event, State>() {
+	private val pharmacyInfoFragmentArgs by navArgs<PharmacyInfoFragmentArgs>()
 
-	private val binding get() = _binding!!
+	override fun getBindingRootView(): View = binding.root
 
-	override fun onCreateView(
-			inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-	): View {
-		_binding = FragmentPharmacyInfoBinding.inflate(inflater, container, false)
+	override fun inflateBinding(
+			layoutInflater: LayoutInflater, container: ViewGroup?
+	): FragmentPharmacyInfoBinding =
+		FragmentPharmacyInfoBinding.inflate(layoutInflater, container, false)
 
-		return binding.root
+	override fun onStart() {
+		super.onStart()
+
+		val startedEvent = StartedEvent(pharmacyInfoFragmentArgs.pharmacyId)
+
+		send(startedEvent)
 	}
 
-	override fun onDestroyView() {
-		super.onDestroyView()
-
-		_binding = null
+	override fun show(state: State) {
+		when (state) {
+		}
 	}
 }
