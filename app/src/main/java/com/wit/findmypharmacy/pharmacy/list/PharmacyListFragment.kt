@@ -19,11 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class PharmacyListFragment :
 		Fragment<FragmentPharmacyListBinding, PharmacyListPresenter, Event, State>() {
 	private val pharmacyAdapter = PharmacyAdapter {
-		val actionPharmacyListFragmentToPharmacyDetailsFragment =
+		val navDirections =
 			PharmacyListFragmentDirections.actionPharmacyListFragmentToPharmacyDetailsFragment(it)
-		findNavController().navigate(
-				actionPharmacyListFragmentToPharmacyDetailsFragment
-		)
+		findNavController().navigate(navDirections)
 	}
 
 	override fun getBindingRootView(): View = binding.root
@@ -42,9 +40,17 @@ class PharmacyListFragment :
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		with(binding.pharmacies) {
-			adapter = pharmacyAdapter
-			layoutManager = LinearLayoutManager(context)
+		with(binding) {
+			with(pharmacies) {
+				adapter = pharmacyAdapter
+				layoutManager = LinearLayoutManager(context)
+			}
+
+			order.setOnClickListener {
+				val navDirections =
+					PharmacyListFragmentDirections.actionPharmacyListFragmentToOrderFragment()
+				findNavController().navigate(navDirections)
+			}
 		}
 	}
 

@@ -5,6 +5,7 @@
 	<string name="order">Order</string>
 
 	<!-- Strings used for fragments for navigation -->
+	<string name="order_fragment_label">Order Fragment</string>
 	<string name="pharmacy_list_fragment_label">Pharmacy List Fragment</string>
 	<string name="pharmacy_info_fragment_label">Pharmacy Info Fragment</string>
 </resources>
