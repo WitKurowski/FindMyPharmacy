@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.databinding.FragmentPharmacyListBinding
 import com.wit.findmypharmacy.databinding.PharmacyListItemBinding
 import com.wit.findmypharmacy.model.Pharmacy
@@ -23,7 +25,9 @@ class PharmacyListFragment : Fragment() {
 
 	private val binding get() = _binding!!
 
-	private val pharmacyAdapter = PharmacyAdapter()
+	private val pharmacyAdapter = PharmacyAdapter {
+		findNavController().navigate(R.id.action_pharmacy_list_fragment_to_pharmacy_details_fragment)
+	}
 
 	@Inject
 	lateinit var pharmacyListPresenter: PharmacyListPresenter
@@ -79,7 +83,7 @@ class PharmacyListFragment : Fragment() {
 		pharmacyAdapter.submitList(pharmacies)
 	}
 
-	private class PharmacyAdapter :
+	private class PharmacyAdapter(private val onPharmacyClicked: (String) -> Unit) :
 			ListAdapter<Pharmacy, PharmacyAdapter.ViewHolder>(ItemCallback()) {
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 			val context = parent.context
@@ -95,6 +99,11 @@ class PharmacyListFragment : Fragment() {
 			with(holder.pharmacyListItemBinding) {
 				val pharmacy = getItem(position)
 				name.text = pharmacy.name
+
+				root.setOnClickListener {
+					val id = pharmacy.id
+					onPharmacyClicked(id)
+				}
 			}
 		}
 
