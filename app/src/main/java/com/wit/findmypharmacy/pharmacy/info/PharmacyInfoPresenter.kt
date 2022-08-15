@@ -21,7 +21,8 @@ class PharmacyInfoPresenter @Inject constructor(
 		val city = addressApiModel.city
 		val state = addressApiModel.state
 		// Note: This format could be extracted out for reuse and for localization.
-		val address = "$streetNumberAndName\n$city, $state"
+		val zipCode = addressApiModel.zipCode
+		val address = "$streetNumberAndName\n$city, $state\n$zipCode"
 		val name = pharmacy.name
 		val pharmacyState = PharmacyState(address, name)
 		show(pharmacyState)
