@@ -15,6 +15,9 @@ class PharmacyInfoPresenter @Inject constructor(
 	}
 
 	private fun onStartedEvent(pharmacyId: String) {
+		val hoursLabelState = HoursLabelState(visible = false)
+		show(hoursLabelState)
+
 		val pharmacyApiModel = pharmacyRepository.get(pharmacyId)
 		val addressApiModel = pharmacyApiModel.addressApiModel!!
 		val streetNumberAndName = addressApiModel.streetNumberAndName
@@ -33,5 +36,9 @@ class PharmacyInfoPresenter @Inject constructor(
 		val phoneNumber = pharmacyApiModel.phoneNumber!!
 		val pharmacyState = PharmacyState(address, hours, name, phoneNumber)
 		show(pharmacyState)
+
+		val visible = hours != null && hours.isNotBlank()
+		val updatedHoursLabelState = hoursLabelState.copy(visible = visible)
+		show(updatedHoursLabelState)
 	}
 }
