@@ -52,23 +52,29 @@
 				android:layout_marginTop="4dp"
 				tools:text="+1-888-987-6543" />
 
-		<TextView
-				android:id="@+id/hours_label"
-				style="@style/Text.Subtitle"
+		<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="8dp"
 				android:layout_marginTop="4dp"
-				android:labelFor="@id/hours_label"
-				android:text="@string/hours_label" />
+				android:orientation="horizontal">
 
-		<TextView
-				android:id="@+id/hours"
-				style="@style/Text.Subtitle"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="8dp"
-				tools:text="9:00am-7:00pm Mon-Fri\n9:00a - 5:00p Sat\n10:00a- 5:00p Sun" />
+			<TextView
+					android:id="@+id/hours_label"
+					style="@style/Text.Subtitle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:labelFor="@id/hours_label"
+					android:text="@string/hours_label" />
+
+			<TextView
+					android:id="@+id/hours"
+					style="@style/Text.Subtitle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="8dp"
+					tools:text="9:00am-7:00pm Mon-Fri\n9:00a - 5:00p Sat\n10:00a- 5:00p Sun" />
+		</LinearLayout>
 
 		<TextView
 				android:id="@+id/ordered_medications_label"
