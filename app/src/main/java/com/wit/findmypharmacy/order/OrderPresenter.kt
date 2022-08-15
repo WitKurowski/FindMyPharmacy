@@ -41,6 +41,8 @@ class OrderPresenter @Inject constructor(
 			it.name
 		}
 		orderRepository.order(pharmacyApiModelId, checkedMedications)
+
+		show(PharmacyListState)
 	}
 
 	private fun onMedicationClicked(name: String, checked: Boolean) {

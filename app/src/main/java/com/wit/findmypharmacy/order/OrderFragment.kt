@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Fragment
@@ -65,12 +66,18 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 	override fun show(state: State) {
 		when (state) {
 			is MedicationsState -> showMedicationsState(state.medicationUiStates)
+			PharmacyListState -> showPharmacyListState()
 			is PharmacyNameState -> showPharmacyNameState(state.name)
 		}
 	}
 
 	private fun showMedicationsState(medicationUiStates: List<MedicationUiState>) {
 		medicationAdapter.submitList(medicationUiStates)
+	}
+
+	private fun showPharmacyListState() {
+		val navDirections = OrderFragmentDirections.actionOrderFragmentToPharmacyListFragment()
+		findNavController().navigate(navDirections)
 	}
 
 	private fun showPharmacyNameState(name: String) {

@@ -14,4 +14,6 @@ data class MedicationsState(val medicationUiStates: List<MedicationUiState>) : S
 
 data class MedicationUiState(val checked: Boolean, val name: String)
 
+object PharmacyListState : State()
+
 data class PharmacyNameState(val name: String) : State()
