@@ -34,24 +34,34 @@ class OrderPresenter @Inject constructor(
 	}
 
 	private fun onCheckOutClicked() {
-		val hasMedicationsSelected = medicationUiStates.any {
-			it.checked
+		val ordersDatabaseModel = orderRepository.get()
+		val previousOrderFromPharmacyExists = ordersDatabaseModel.any {
+			it.pharmacyApiModelId == nearestPharmacyApiModel.id
 		}
 
-		if (hasMedicationsSelected) {
-			val pharmacyApiModelId = nearestPharmacyApiModel.id
-			val checkedMedicationUiStates = medicationUiStates.filter {
+		if (previousOrderFromPharmacyExists) {
+			val toastState = ToastState(R.string.order_already_exists_with_pharmacy)
+			show(toastState)
+		} else {
+			val hasMedicationsSelected = medicationUiStates.any {
 				it.checked
 			}
-			val checkedMedications = checkedMedicationUiStates.map {
-				it.name
-			}
-			orderRepository.order(pharmacyApiModelId, checkedMedications)
 
-			show(PharmacyListState)
-		} else {
-			val toastState = ToastState(R.string.no_medications_selected)
-			show(toastState)
+			if (hasMedicationsSelected) {
+				val pharmacyApiModelId = nearestPharmacyApiModel.id
+				val checkedMedicationUiStates = medicationUiStates.filter {
+					it.checked
+				}
+				val checkedMedications = checkedMedicationUiStates.map {
+					it.name
+				}
+				orderRepository.order(pharmacyApiModelId, checkedMedications)
+
+				show(PharmacyListState)
+			} else {
+				val toastState = ToastState(R.string.no_medications_selected)
+				show(toastState)
+			}
 		}
 	}
 

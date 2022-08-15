@@ -5,6 +5,7 @@
 	<string name="hours_label">Hours: </string>
 	<string name="no_medications_selected">Please select one or more medications.</string>
 	<string name="order">Order</string>
+	<string name="order_already_exists_with_pharmacy">Unable to reorder from the same pharmacy.</string>
 	<string name="ordering_from_label">Ordering from:</string>
 	<string name="select_medications">Selection medications:</string>
 
