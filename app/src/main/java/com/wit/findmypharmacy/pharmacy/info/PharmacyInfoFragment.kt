@@ -30,14 +30,15 @@ class PharmacyInfoFragment :
 
 	override fun show(state: State) {
 		when (state) {
-			is PharmacyState -> showPharmacyState(state.address, state.name)
+			is PharmacyState -> showPharmacyState(state.address, state.name, state.phoneNumber)
 		}
 	}
 
-	private fun showPharmacyState(address: String, name: String) {
+	private fun showPharmacyState(address: String, name: String, phoneNumber: String) {
 		with(binding) {
 			this.address.text = address
 			this.name.text = name
+			this.phoneNumber.text = phoneNumber
 		}
 	}
 }

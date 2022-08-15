@@ -22,8 +22,21 @@
 			style="@style/Text.Subtitle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="4dp"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/name"
 			tools:lines="2"
 			tools:text="@tools:sample/lorem/random" />
+
+	<TextView
+			android:id="@+id/phone_number"
+			style="@style/Text.Subtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="4dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/address"
+			tools:text="+1-888-987-6543" />
 </androidx.constraintlayout.widget.ConstraintLayout>
