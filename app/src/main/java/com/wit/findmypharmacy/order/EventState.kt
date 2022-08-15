@@ -11,3 +11,5 @@ sealed class State
 data class MedicationsState(val medicationUiStates: List<MedicationUiState>) : State()
 
 data class MedicationUiState(val checked: Boolean, val name: String)
+
+data class PharmacyNameState(val name: String) : State()

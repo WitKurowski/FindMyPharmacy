@@ -4,6 +4,7 @@
 	<string name="home">Home</string>
 	<string name="hours_label">Hours: </string>
 	<string name="order">Order</string>
+	<string name="ordering_from_label">Ordering from:</string>
 
 	<!-- Strings used for fragments for navigation -->
 	<string name="order_fragment_label">Order Fragment</string>

@@ -8,17 +8,18 @@ import javax.inject.Inject
 class PharmacyRepository @Inject constructor(private val pharmacyApi: PharmacyApi) {
 	fun get(): List<PharmacyApiModel> {
 		// TODO: Retrieve from file instead
-		val pharmacies = listOf(
-				PharmacyApiModel(null, null, "NRxPh-HLRS", "ReCept", null),
-				PharmacyApiModel(null, null, "NRxPh-BAC1", "My Community Pharmacy", null),
-				PharmacyApiModel(null, null, "NRxPh-SJC1", "MedTime Pharmacy", null),
-				PharmacyApiModel(null, null, "NRxPh-ZEREiaYq", "NY Pharmacy", null)
-		)
+		val pharmacyIds = listOf("NRxPh-HLRS", "NRxPh-BAC1", "NRxPh-SJC1", "NRxPh-ZEREiaYq")
+
+		// TODO: Kick off concurrent coroutines for each
+		val pharmacies = pharmacyIds.map {
+			get(it)
+		}
 
 		return pharmacies
 	}
 
 	fun get(id: String): PharmacyApiModel {
+		// TODO: Extract into PharmacyRemoteDataSource class.
 		val call = pharmacyApi.getPharmacy(id)
 		val response = call.execute()
 		val pharmacy = if (response.isSuccessful) {

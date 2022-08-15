@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
+
+	<TextView
+			android:id="@+id/ordering_from_label"
+			style="@style/Text.Subtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+			android:layout_marginVertical="@dimen/activity_vertical_margin"
+			android:text="@string/ordering_from_label"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+	<TextView
+			android:id="@+id/pharmacy_name"
+			style="@style/Text.Title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="32dp"
+			android:layout_marginTop="4dp"
+			android:lines="1"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/ordering_from_label"
+			tools:text="@tools:sample/lorem/random" />
 
 	<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/medications"
@@ -11,5 +35,5 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
+			app:layout_constraintTop_toBottomOf="@id/pharmacy_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

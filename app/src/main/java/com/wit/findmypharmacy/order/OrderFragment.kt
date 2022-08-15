@@ -61,11 +61,16 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 	override fun show(state: State) {
 		when (state) {
 			is MedicationsState -> showMedicationsState(state.medicationUiStates)
+			is PharmacyNameState -> showPharmacyNameState(state.name)
 		}
 	}
 
 	private fun showMedicationsState(medicationUiStates: List<MedicationUiState>) {
 		medicationAdapter.submitList(medicationUiStates)
+	}
+
+	private fun showPharmacyNameState(name: String) {
+		binding.pharmacyName.text = name
 	}
 
 	private class MedicationAdapter(private val onMedicationClicked: (String, Boolean) -> Unit) :
