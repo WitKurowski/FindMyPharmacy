@@ -1,13 +1,14 @@
 package com.wit.findmypharmacy.order
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Fragment
 import com.wit.findmypharmacy.databinding.FragmentOrderBinding
 import com.wit.findmypharmacy.databinding.MedicationListItemBinding
@@ -18,6 +19,18 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 	private val medicationAdapter = MedicationAdapter { medication, checked ->
 		val medicationClicked = MedicationClicked(medication, checked)
 		send(medicationClicked)
+	}
+
+	private fun addMenuProvider() {
+		requireActivity().addMenuProvider(object : MenuProvider {
+			override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+				menuInflater.inflate(R.menu.fragment_order, menu)
+			}
+
+			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+				return true
+			}
+		}, viewLifecycleOwner, Lifecycle.State.RESUMED)
 	}
 
 	override fun getBindingRootView(): View = binding.root
@@ -34,6 +47,8 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		addMenuProvider()
 
 		with(binding.medications) {
 			adapter = medicationAdapter
