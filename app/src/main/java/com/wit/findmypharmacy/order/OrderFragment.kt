@@ -15,7 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, State>() {
-	private val medicationAdapter = MedicationAdapter()
+	private val medicationAdapter = MedicationAdapter { medication, checked ->
+		val medicationClicked = MedicationClicked(medication, checked)
+		send(medicationClicked)
+	}
 
 	override fun getBindingRootView(): View = binding.root
 
@@ -40,16 +43,16 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 
 	override fun show(state: State) {
 		when (state) {
-			is MedicationsState -> showMedicationsState(state.medications)
+			is MedicationsState -> showMedicationsState(state.medicationUiStates)
 		}
 	}
 
-	private fun showMedicationsState(medications: List<String>) {
-		medicationAdapter.submitList(medications)
+	private fun showMedicationsState(medicationUiStates: List<MedicationUiState>) {
+		medicationAdapter.submitList(medicationUiStates)
 	}
 
-	private class MedicationAdapter :
-			ListAdapter<String, MedicationAdapter.ViewHolder>(ItemCallback()) {
+	private class MedicationAdapter(private val onMedicationClicked: (String, Boolean) -> Unit) :
+			ListAdapter<MedicationUiState, MedicationAdapter.ViewHolder>(ItemCallback()) {
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 			val context = parent.context
 			val layoutInflater = LayoutInflater.from(context)
@@ -61,21 +64,35 @@ class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, Stat
 		}
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-			val name = getItem(position)
-			holder.medicationListItemBinding.name.text = name
+			with(holder.medicationListItemBinding) {
+				with(name) {
+					val medicationUiState = getItem(position)
+					val name = medicationUiState.name
+					text = name
+
+					setOnCheckedChangeListener(null)
+
+					val checked = medicationUiState.checked
+					isChecked = checked
+
+					setOnCheckedChangeListener { _, b ->
+						onMedicationClicked(name, b)
+					}
+				}
+			}
 		}
 
-		private class ItemCallback : DiffUtil.ItemCallback<String>() {
+		private class ItemCallback : DiffUtil.ItemCallback<MedicationUiState>() {
 			override fun areContentsTheSame(
-					oldItem: String, newItem: String
+					oldItem: MedicationUiState, newItem: MedicationUiState
 			): Boolean {
 				return oldItem == newItem
 			}
 
 			override fun areItemsTheSame(
-					oldItem: String, newItem: String
+					oldItem: MedicationUiState, newItem: MedicationUiState
 			): Boolean {
-				return oldItem == newItem
+				return oldItem.name == newItem.name
 			}
 		}
 
