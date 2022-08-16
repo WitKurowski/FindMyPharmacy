@@ -40,7 +40,7 @@ class PharmacyInfoPresenter @Inject constructor(
 		val hours = pharmacyApiModel.hours?.replace(newLineStringWithWhitespaceRegex, "\n")
 
 		val name = pharmacyApiModel.name
-		val phoneNumber = pharmacyApiModel.phoneNumber!!
+		val phoneNumber = pharmacyApiModel.phoneNumber
 		val pharmacyState = PharmacyState(address, hours, name, phoneNumber)
 		show(pharmacyState)
 

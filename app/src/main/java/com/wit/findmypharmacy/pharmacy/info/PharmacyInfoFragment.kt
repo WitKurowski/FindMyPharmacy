@@ -73,7 +73,7 @@ class PharmacyInfoFragment :
 	}
 
 	private fun showPharmacyState(
-			address: String, hours: String?, name: String, phoneNumber: String
+			address: String, hours: String?, name: String, phoneNumber: String?
 	) {
 		with(binding) {
 			this.address.text = address
