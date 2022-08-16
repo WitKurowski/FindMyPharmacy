@@ -2,6 +2,7 @@
 	<string name="app_name">Find My Pharmacy</string>
 	<string name="check_out">Check out</string>
 	<string name="failed_to_retrieve_medications">Failed to retrieve medications.</string>
+	<string name="failed_to_retrieve_order_history">Failed to retrieve order history.</string>
 	<string name="failed_to_retrieve_pharmacies">Failed to retrieve pharmacies.</string>
 	<string name="failed_to_retrieve_pharmacies_and_orders">Failed to retrieve pharmacies and orders.</string>
 	<string name="home">Home</string>

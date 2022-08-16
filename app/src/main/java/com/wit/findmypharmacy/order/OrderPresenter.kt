@@ -38,34 +38,38 @@ class OrderPresenter @Inject constructor(
 	}
 
 	private fun onCheckOutClicked() {
-		val ordersDatabaseModel = orderRepository.get()
-		val previousOrderFromPharmacyExists = ordersDatabaseModel.any {
-			it.pharmacyId == nearestPharmacy.id
-		}
-
-		if (previousOrderFromPharmacyExists) {
-			showToastState(R.string.order_already_exists_with_pharmacy)
-		} else {
-			val hasMedicationsSelected = medicationUiStates.any {
-				it.checked
+		try {
+			val ordersDatabaseModel = orderRepository.get()
+			val previousOrderFromPharmacyExists = ordersDatabaseModel.any {
+				it.pharmacyId == nearestPharmacy.id
 			}
 
-			if (hasMedicationsSelected) {
-				val pharmacyApiModelId = nearestPharmacy.id
-				val checkedMedicationUiStates = medicationUiStates.filter {
+			if (previousOrderFromPharmacyExists) {
+				showToastState(R.string.order_already_exists_with_pharmacy)
+			} else {
+				val hasMedicationsSelected = medicationUiStates.any {
 					it.checked
 				}
-				val checkedMedications = checkedMedicationUiStates.map {
-					it.name
+
+				if (hasMedicationsSelected) {
+					val pharmacyApiModelId = nearestPharmacy.id
+					val checkedMedicationUiStates = medicationUiStates.filter {
+						it.checked
+					}
+					val checkedMedications = checkedMedicationUiStates.map {
+						it.name
+					}
+					orderRepository.order(pharmacyApiModelId, checkedMedications)
+
+					showToastState(R.string.successfully_submitted_order)
+
+					show(PharmacyListState)
+				} else {
+					showToastState(R.string.no_medications_selected)
 				}
-				orderRepository.order(pharmacyApiModelId, checkedMedications)
-
-				showToastState(R.string.successfully_submitted_order)
-
-				show(PharmacyListState)
-			} else {
-				showToastState(R.string.no_medications_selected)
 			}
+		} catch (httpException: HttpException) {
+			showToastState(R.string.failed_to_retrieve_order_history)
 		}
 	}
 
