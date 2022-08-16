@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Presenter
-import com.wit.findmypharmacy.model.PharmacyApiModel
+import com.wit.findmypharmacy.model.Pharmacy
 import com.wit.findmypharmacy.repository.MedicationRepository
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
@@ -26,7 +26,7 @@ class OrderPresenter @Inject constructor(
 	private val medicationUiStates = mutableListOf<MedicationUiState>()
 
 	@VisibleForTesting
-	lateinit var nearestPharmacyApiModel: PharmacyApiModel
+	lateinit var nearestPharmacy: Pharmacy
 
 	override fun on(event: Event) {
 		when (event) {
@@ -39,7 +39,7 @@ class OrderPresenter @Inject constructor(
 	private fun onCheckOutClicked() {
 		val ordersDatabaseModel = orderRepository.get()
 		val previousOrderFromPharmacyExists = ordersDatabaseModel.any {
-			it.pharmacyApiModelId == nearestPharmacyApiModel.id
+			it.pharmacyApiModelId == nearestPharmacy.id
 		}
 
 		if (previousOrderFromPharmacyExists) {
@@ -50,7 +50,7 @@ class OrderPresenter @Inject constructor(
 			}
 
 			if (hasMedicationsSelected) {
-				val pharmacyApiModelId = nearestPharmacyApiModel.id
+				val pharmacyApiModelId = nearestPharmacy.id
 				val checkedMedicationUiStates = medicationUiStates.filter {
 					it.checked
 				}
@@ -86,10 +86,10 @@ class OrderPresenter @Inject constructor(
 
 		val pharmacies = pharmacyRepository.get()
 		val results = FloatArray(1)
-		nearestPharmacyApiModel = pharmacies.minByOrNull {
-			val addressApiModel = it.addressApiModel
-			val latitude = addressApiModel.latitude
-			val longitude = addressApiModel.longitude
+		nearestPharmacy = pharmacies.minByOrNull {
+			val address = it.address
+			val latitude = address.latitude
+			val longitude = address.longitude
 
 			// TODO: Extract into injected class to allow for unit tests.
 			Location.distanceBetween(
@@ -102,7 +102,7 @@ class OrderPresenter @Inject constructor(
 
 			results[0]
 		}!!
-		val pharmacyNameState = PharmacyNameState(nearestPharmacyApiModel.name)
+		val pharmacyNameState = PharmacyNameState(nearestPharmacy.name)
 		show(pharmacyNameState)
 
 		val medications = medicationRepository.get()

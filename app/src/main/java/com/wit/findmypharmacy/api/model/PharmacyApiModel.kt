@@ -1,4 +1,4 @@
-package com.wit.findmypharmacy.model
+package com.wit.findmypharmacy.api.model
 
 import com.google.gson.annotations.SerializedName
 

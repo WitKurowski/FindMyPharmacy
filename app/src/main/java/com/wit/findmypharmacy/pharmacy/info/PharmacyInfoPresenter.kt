@@ -25,23 +25,23 @@ class PharmacyInfoPresenter @Inject constructor(
 
 		showOrderedMedicationsLabelState(visible = false)
 
-		val pharmacyApiModel = pharmacyRepository.get(pharmacyId)
-		val addressApiModel = pharmacyApiModel.addressApiModel
-		val streetNumberAndName = addressApiModel.streetNumberAndName
-		val city = addressApiModel.city
-		val state = addressApiModel.state
-		val zipCode = addressApiModel.zipCode
+		val pharmacy = pharmacyRepository.get(pharmacyId)
+		val address = pharmacy.address
+		val streetNumberAndName = address.streetNumberAndName
+		val city = address.city
+		val state = address.state
+		val zipCode = address.zipCode
 		// Note: This format should be extracted out for reuse and for localization.
-		val address = "$streetNumberAndName\n$city, $state\n$zipCode"
+		val addressString = "$streetNumberAndName\n$city, $state\n$zipCode"
 
 		// Replace needed because some of the hour strings have "\n" as two characters rather than
 		// the '\n' character.
 		val newLineStringWithWhitespaceRegex = Regex("\\s*\\\\n\\s*")
-		val hours = pharmacyApiModel.hours?.replace(newLineStringWithWhitespaceRegex, "\n")
+		val hours = pharmacy.hours?.replace(newLineStringWithWhitespaceRegex, "\n")
 
-		val name = pharmacyApiModel.name
-		val phoneNumber = pharmacyApiModel.phoneNumber
-		val pharmacyState = PharmacyState(address, hours, name, phoneNumber)
+		val name = pharmacy.name
+		val phoneNumber = pharmacy.phoneNumber
+		val pharmacyState = PharmacyState(addressString, hours, name, phoneNumber)
 		show(pharmacyState)
 
 		val visible = hours != null && hours.isNotBlank()

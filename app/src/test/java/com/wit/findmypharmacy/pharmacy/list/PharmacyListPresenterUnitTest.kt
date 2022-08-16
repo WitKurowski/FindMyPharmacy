@@ -38,10 +38,7 @@ class PharmacyListPresenterUnitTest {
 	@Test
 	fun testStartedEvent1() {
 		val pharmacyApiModels = listOf(
-				TestData.pharmacyApiModel1,
-				TestData.pharmacyApiModel2,
-				TestData.pharmacyApiModel3,
-				TestData.pharmacyApiModel4
+				TestData.pharmacy1, TestData.pharmacy2, TestData.pharmacy3, TestData.pharmacy4
 		)
 		BDDMockito //
 				.given(pharmacyRepository.get()) //
@@ -58,16 +55,16 @@ class PharmacyListPresenterUnitTest {
 				.post(ProgressIndicatorState(visible = true))
 
 		val pharmacyUiState1 = PharmacyUiState(
-				checked = false, TestData.pharmacyApiModelId1, TestData.pharmacyApiModelName1
+				checked = false, TestData.pharmacyId1, TestData.pharmacyName1
 		)
 		val pharmacyUiState2 = PharmacyUiState(
-				checked = false, TestData.pharmacyApiModelId2, TestData.pharmacyApiModelName2
+				checked = false, TestData.pharmacyId2, TestData.pharmacyName2
 		)
 		val pharmacyUiState3 = PharmacyUiState(
-				checked = false, TestData.pharmacyApiModelId3, TestData.pharmacyApiModelName3
+				checked = false, TestData.pharmacyId3, TestData.pharmacyName3
 		)
 		val pharmacyUiState4 = PharmacyUiState(
-				checked = false, TestData.pharmacyApiModelId4, TestData.pharmacyApiModelName4
+				checked = false, TestData.pharmacyId4, TestData.pharmacyName4
 		)
 		val pharmacyUiStates =
 			listOf(pharmacyUiState1, pharmacyUiState2, pharmacyUiState3, pharmacyUiState4)
@@ -88,19 +85,15 @@ class PharmacyListPresenterUnitTest {
 	@Test
 	fun testStartedEvent2() {
 		val pharmacyApiModels = listOf(
-				TestData.pharmacyApiModel1,
-				TestData.pharmacyApiModel2,
-				TestData.pharmacyApiModel3,
-				TestData.pharmacyApiModel4
+				TestData.pharmacy1, TestData.pharmacy2, TestData.pharmacy3, TestData.pharmacy4
 		)
 		BDDMockito //
 				.given(pharmacyRepository.get()) //
 				.willReturn(pharmacyApiModels)
 
 		val orderDatabaseModel1 =
-			OrderDatabaseModel(TestData.pharmacyApiModelId2, listOf("Abelcet", "Abilify"))
-		val orderDatabaseModel2 =
-			OrderDatabaseModel(TestData.pharmacyApiModelId3, listOf("Acarbose"))
+			OrderDatabaseModel(TestData.pharmacyId2, listOf("Abelcet", "Abilify"))
+		val orderDatabaseModel2 = OrderDatabaseModel(TestData.pharmacyId3, listOf("Acarbose"))
 		val orderDatabaseModels = listOf(orderDatabaseModel1, orderDatabaseModel2)
 		BDDMockito //
 				.given(orderRepository.get()) //
@@ -114,16 +107,16 @@ class PharmacyListPresenterUnitTest {
 				.post(progressIndicatorState1)
 
 		val pharmacyUiState1 = PharmacyUiState(
-				checked = false, TestData.pharmacyApiModelId1, TestData.pharmacyApiModelName1
+				checked = false, TestData.pharmacyId1, TestData.pharmacyName1
 		)
 		val pharmacyUiState2 = PharmacyUiState(
-				checked = true, TestData.pharmacyApiModelId2, TestData.pharmacyApiModelName2
+				checked = true, TestData.pharmacyId2, TestData.pharmacyName2
 		)
 		val pharmacyUiState3 = PharmacyUiState(
-				checked = true, TestData.pharmacyApiModelId3, TestData.pharmacyApiModelName3
+				checked = true, TestData.pharmacyId3, TestData.pharmacyName3
 		)
 		val pharmacyUiState4 = PharmacyUiState(
-				checked = false, TestData.pharmacyApiModelId4, TestData.pharmacyApiModelName4
+				checked = false, TestData.pharmacyId4, TestData.pharmacyName4
 		)
 		val pharmacyUiStates =
 			listOf(pharmacyUiState1, pharmacyUiState2, pharmacyUiState3, pharmacyUiState4)

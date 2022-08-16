@@ -41,14 +41,14 @@ class PharmacyInfoPresenterUnitTest {
 	@Test
 	fun testStartedEvent1() {
 		BDDMockito //
-				.given(pharmacyRepository.get(TestData.pharmacyApiModelId2)) //
-				.willReturn(TestData.pharmacyApiModel2)
+				.given(pharmacyRepository.get(TestData.pharmacyId2)) //
+				.willReturn(TestData.pharmacy2)
 
 		BDDMockito //
 				.given(orderRepository.get()) //
 				.willReturn(emptyList())
 
-		val startedEvent = StartedEvent(TestData.pharmacyApiModelId2)
+		val startedEvent = StartedEvent(TestData.pharmacyId2)
 		pharmacyInfoPresenter.onInternal(startedEvent)
 
 		val progressIndicatorState1 = ProgressIndicatorState(visible = true)
@@ -69,7 +69,7 @@ class PharmacyInfoPresenterUnitTest {
 		val address = "1501 8th Ave # A\nSan Francisco, CA\n94122"
 		val hours = "9:00a-7:30p Mon-Fri\n10:00a-4:00p Sat"
 		val pharmacyState = PharmacyState(
-				address, hours, TestData.pharmacyApiModelName2, TestData.pharmacyPhoneNumber2
+				address, hours, TestData.pharmacyName2, TestData.pharmacyPhoneNumber2
 		)
 		BDDMockito //
 				.verify(stateEventBus) //
@@ -96,18 +96,18 @@ class PharmacyInfoPresenterUnitTest {
 	@Test
 	fun testStartedEvent2() {
 		BDDMockito //
-				.given(pharmacyRepository.get(TestData.pharmacyApiModelId4)) //
-				.willReturn(TestData.pharmacyApiModel4)
+				.given(pharmacyRepository.get(TestData.pharmacyId4)) //
+				.willReturn(TestData.pharmacy4)
 
 		val medications1 = listOf("Abelcet", "Acarbose")
-		val orderDatabaseModel1 = OrderDatabaseModel(TestData.pharmacyApiModelId2, medications1)
+		val orderDatabaseModel1 = OrderDatabaseModel(TestData.pharmacyId2, medications1)
 		val medications2 = listOf("Abelcet", "Acarbose")
-		val orderDatabaseModel2 = OrderDatabaseModel(TestData.pharmacyApiModelId3, medications2)
+		val orderDatabaseModel2 = OrderDatabaseModel(TestData.pharmacyId3, medications2)
 		BDDMockito //
 				.given(orderRepository.get()) //
 				.willReturn(listOf(orderDatabaseModel1, orderDatabaseModel2))
 
-		val startedEvent = StartedEvent(TestData.pharmacyApiModelId4)
+		val startedEvent = StartedEvent(TestData.pharmacyId4)
 		pharmacyInfoPresenter.onInternal(startedEvent)
 
 		val progressIndicatorState1 = ProgressIndicatorState(visible = true)
@@ -128,7 +128,7 @@ class PharmacyInfoPresenterUnitTest {
 		val address = "3 E 52ND ST\nNEW YORK, NY\n10022"
 		val hours = null
 		val pharmacyState = PharmacyState(
-				address, hours, TestData.pharmacyApiModelName4, TestData.pharmacyPhoneNumber4
+				address, hours, TestData.pharmacyName4, TestData.pharmacyPhoneNumber4
 		)
 		BDDMockito //
 				.verify(stateEventBus) //
@@ -150,18 +150,18 @@ class PharmacyInfoPresenterUnitTest {
 	@Test
 	fun testStartedEvent3() {
 		BDDMockito //
-				.given(pharmacyRepository.get(TestData.pharmacyApiModelId3)) //
-				.willReturn(TestData.pharmacyApiModel3)
+				.given(pharmacyRepository.get(TestData.pharmacyId3)) //
+				.willReturn(TestData.pharmacy3)
 
 		val medications1 = listOf("Abelcet", "Acarbose")
-		val orderDatabaseModel1 = OrderDatabaseModel(TestData.pharmacyApiModelId2, medications1)
+		val orderDatabaseModel1 = OrderDatabaseModel(TestData.pharmacyId2, medications1)
 		val medications2 = listOf("Abilify")
-		val orderDatabaseModel2 = OrderDatabaseModel(TestData.pharmacyApiModelId3, medications2)
+		val orderDatabaseModel2 = OrderDatabaseModel(TestData.pharmacyId3, medications2)
 		BDDMockito //
 				.given(orderRepository.get()) //
 				.willReturn(listOf(orderDatabaseModel1, orderDatabaseModel2))
 
-		val startedEvent = StartedEvent(TestData.pharmacyApiModelId3)
+		val startedEvent = StartedEvent(TestData.pharmacyId3)
 		pharmacyInfoPresenter.onInternal(startedEvent)
 
 		val progressIndicatorState1 = ProgressIndicatorState(visible = true)
@@ -182,7 +182,7 @@ class PharmacyInfoPresenterUnitTest {
 		val address = "2317 BROADWAY ST\nREDWOOD CITY, CA\n94063"
 		val hours = "9:00am-7:00pm Mon-Fri\n9:00a - 5:00p Sat\n10:00a- 5:00p Sun"
 		val pharmacyState = PharmacyState(
-				address, hours, TestData.pharmacyApiModelName3, TestData.pharmacyPhoneNumber3
+				address, hours, TestData.pharmacyName3, TestData.pharmacyPhoneNumber3
 		)
 		BDDMockito //
 				.verify(stateEventBus) //

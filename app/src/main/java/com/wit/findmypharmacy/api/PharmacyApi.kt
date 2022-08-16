@@ -1,7 +1,7 @@
 package com.wit.findmypharmacy.api
 
 import com.google.gson.annotations.SerializedName
-import com.wit.findmypharmacy.model.PharmacyApiModel
+import com.wit.findmypharmacy.api.model.PharmacyApiModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
