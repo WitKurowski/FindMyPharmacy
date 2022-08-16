@@ -19,7 +19,6 @@ What is missing:
 
 - Unit tests for 1 of the 3 presenter classes, OrderPresenter, are incomplete because a refactor is
   needed to pull out the static use of Android's Location class.
-- Finer separation at the data layer between repositories and remote/local data sources.
 - Some pharmacies have a second address line JSON field that does not get returned for all pharmacy
   resources, and it would have been nice to use that for complete rendering of pharmacy addresses.
 
