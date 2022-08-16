@@ -13,6 +13,9 @@ import com.wit.findmypharmacy.databinding.FragmentPharmacyListBinding
 import com.wit.findmypharmacy.databinding.PharmacyListItemBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * The screen that shows all available pharmacies.
+ */
 @AndroidEntryPoint
 class PharmacyListFragment :
 		Fragment<FragmentPharmacyListBinding, PharmacyListPresenter, Event, State>() {

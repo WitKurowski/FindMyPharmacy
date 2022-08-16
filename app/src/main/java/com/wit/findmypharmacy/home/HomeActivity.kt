@@ -10,6 +10,9 @@ import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * The singular activity for this application.
+ */
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 	private lateinit var appBarConfiguration: AppBarConfiguration

@@ -10,6 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+/**
+ * Contains all dependency injection objects that require some special setup or configuration.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class Module {
@@ -22,7 +25,8 @@ class Module {
 	@Singleton
 	fun provideRetrofit(): Retrofit {
 		val retrofit = Retrofit.Builder().run {
-			// TODO: Extract into resource
+			// Note: It would be cleaner to extract this into a resource to allow for different
+			// endpoint base URLs across app flavors.
 			baseUrl("https://api-qa-demo.nimbleandsimple.com/")
 			addConverterFactory(GsonConverterFactory.create())
 			build()

@@ -16,6 +16,9 @@ import com.wit.findmypharmacy.databinding.FragmentOrderBinding
 import com.wit.findmypharmacy.databinding.MedicationListItemCheckableBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * The screen that provides the user with the ability to order a set of medications from a pharmacy.
+ */
 @AndroidEntryPoint
 class OrderFragment : Fragment<FragmentOrderBinding, OrderPresenter, Event, State>() {
 	private val medicationAdapter = MedicationAdapter { medication, checked ->

@@ -30,8 +30,8 @@ class PharmacyInfoPresenter @Inject constructor(
 		val streetNumberAndName = addressApiModel.streetNumberAndName
 		val city = addressApiModel.city
 		val state = addressApiModel.state
-		// Note: This format could be extracted out for reuse and for localization.
 		val zipCode = addressApiModel.zipCode
+		// Note: This format should be extracted out for reuse and for localization.
 		val address = "$streetNumberAndName\n$city, $state\n$zipCode"
 
 		// Replace needed because some of the hour strings have "\n" as two characters rather than
