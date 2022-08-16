@@ -14,5 +14,5 @@
 	<!-- Strings used for fragments for navigation -->
 	<string name="order_fragment_label">Order Fragment</string>
 	<string name="pharmacy_list_fragment_label">Find My Pharmacy</string>
-	<string name="pharmacy_info_fragment_label">Pharmacy Info Fragment</string>
+	<string name="pharmacy_info_fragment_label">Pharmacy Details</string>
 </resources>
