@@ -22,6 +22,8 @@ What is missing:
   resources, and it would have been nice to use that for complete rendering of pharmacy addresses.
 
 Other areas of improvements:
+- When a network error happens, it would be nice to provide a way for the user to retry the last
+  action, such as via a clickable option in a Snackbar.
 - Pulling the default set of pharmacies from a local JSON file rather than hard-coding the IDs of
   the handful of needed pharmacies.
 - Saving of orders in persistent storage instead of in-memory.
