@@ -11,6 +11,9 @@ lifecycle components and to make for a faster, and more resilient app experience
 
 It does makes use of Jetpack's Navigation library, though, and the Dagger Hilt library.
 
+Although I am generally a fan of self-commenting code, I did try to be a bit more liberal with my
+comments, particularly with the more notable fields/methods/classes.
+
 What is missing:
 - Unit tests for 1 of the 3 presenter classes, OrderPresenter, are incomplete because a refactor is
   needed to pull out the static use of Android's Location class.
