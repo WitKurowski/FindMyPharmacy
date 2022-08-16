@@ -24,12 +24,13 @@ What is missing:
 Other areas of improvements:
 - Pulling the default set of pharmacies from a local JSON file rather than hard-coding the IDs of
   the handful of needed pharmacies.
-- Saving of orders in persistent storage instead of in-memory
+- Saving of orders in persistent storage instead of in-memory.
 - There are opportunities for concurrent network calls for independent sets of objects that could be
   handled by Kotlin Coroutines, although this would require further setup of dependency injection
-  logic with coroutine dispatchers
+  logic with coroutine dispatchers.
 - Adding a way to quickly scroll through the medication list by first letter as the Android Contacts 
   app does would be nice, and allowing the user to do a keyword search would be even better.
 - If the user was paying for the medications being ordered, having an intermediary verification
   screen that shows just the selected medications would be helpful.
+- Adding unit tests for other layers of the app, such as for the repository classes.
 - The colors of the FAB and menu icons are not optimized for the rest of the color scheme.
