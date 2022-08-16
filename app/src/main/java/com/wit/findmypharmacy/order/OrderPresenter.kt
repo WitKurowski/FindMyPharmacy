@@ -108,7 +108,8 @@ class OrderPresenter @Inject constructor(
 		val medications = medicationRepository.get()
 
 		medications.forEach {
-			val medicationUiState = MedicationUiState(checked = false, name = it)
+			val name = it.name
+			val medicationUiState = MedicationUiState(checked = false, name = name)
 			medicationUiStates.add(medicationUiState)
 		}
 

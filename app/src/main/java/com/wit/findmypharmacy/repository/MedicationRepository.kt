@@ -1,5 +1,6 @@
 package com.wit.findmypharmacy.repository
 
+import com.wit.findmypharmacy.model.Medication
 import java.net.URL
 import javax.inject.Inject
 
@@ -12,7 +13,7 @@ class MedicationRepository @Inject constructor() {
 	 *
 	 * @return All medications that are available for ordering.
 	 */
-	fun get(): List<String> {
+	fun get(): List<Medication> {
 		// TODO: Extract into MedicationRemoteDataSource class.
 		val url = URL(
 				"https",
@@ -22,9 +23,10 @@ class MedicationRepository @Inject constructor() {
 		val string = url.readText()
 		val regex = Regex(",\\s*")
 		val medicationNames = string.split(regex)
+		val medications = medicationNames.map {
+			Medication(name = it)
+		}
 
-		// TODO: Convert to Medication objects
-
-		return medicationNames
+		return medications
 	}
 }
