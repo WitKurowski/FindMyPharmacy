@@ -25,4 +25,8 @@ Other areas of improvements:
 - There are opportunities for concurrent network calls for independent sets of objects that could be
   handled by Kotlin Coroutines, although this would require further setup of dependency injection
   logic with coroutine dispatchers
+- Adding a way to quickly scroll through the medication list by first letter as the Android Contacts 
+  app does would be nice, and allowing the user to do a keyword search would be even better.
+- If the user was paying for the medications being ordered, having an intermediary verification
+  screen that shows just the selected medications would be helpful.
 - The colors of the FAB and menu icons are not optimized for the rest of the color scheme.
