@@ -40,5 +40,5 @@ Other areas of improvements:
   app does would be nice, and allowing the user to do a keyword search would be even better.
 - If the user was paying for the medications being ordered, having an intermediary verification
   screen that shows just the selected medications would be helpful.
-- Adding unit tests for other layers of the app, such as for the repository classes.
+- Adding unit tests for other layers of the app, where appropriate.
 - Fix the coloring of the FAB and menu icons.
