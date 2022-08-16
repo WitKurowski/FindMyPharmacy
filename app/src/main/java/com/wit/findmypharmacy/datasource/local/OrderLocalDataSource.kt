@@ -1,6 +1,6 @@
 package com.wit.findmypharmacy.datasource.local
 
-import com.wit.findmypharmacy.model.OrderDatabaseModel
+import com.wit.findmypharmacy.datasource.local.model.OrderDatabaseModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class OrderLocalDataSource @Inject constructor() {
 	// Note: This would be ideally saved into a persistent database (e.g., Room).
-	private val orders = mutableListOf<OrderDatabaseModel>()
+	private val orderDatabaseModels = mutableListOf<OrderDatabaseModel>()
 
 	/**
 	 * Returns all stored orders.
@@ -18,7 +18,7 @@ class OrderLocalDataSource @Inject constructor() {
 	 * @return All stored orders.
 	 */
 	fun get(): List<OrderDatabaseModel> {
-		return orders
+		return orderDatabaseModels
 	}
 
 	/**
@@ -27,6 +27,6 @@ class OrderLocalDataSource @Inject constructor() {
 	 * @param orderDatabaseModel The order to store.
 	 */
 	fun saveOrder(orderDatabaseModel: OrderDatabaseModel) {
-		orders.add(orderDatabaseModel)
+		orderDatabaseModels.add(orderDatabaseModel)
 	}
 }

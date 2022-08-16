@@ -48,13 +48,13 @@ class PharmacyInfoPresenter @Inject constructor(
 		val updatedHoursLabelState = hoursLabelState.copy(visible = visible)
 		show(updatedHoursLabelState)
 
-		val orderDatabaseModels = orderRepository.get()
-		val matchingOrderDatabaseModels = orderDatabaseModels.find {
-			it.pharmacyApiModelId == pharmacyId
+		val orders = orderRepository.get()
+		val matchingOrder = orders.find {
+			it.pharmacyId == pharmacyId
 		}
 
-		if (matchingOrderDatabaseModels != null) {
-			val medications = matchingOrderDatabaseModels.medications
+		if (matchingOrder != null) {
+			val medications = matchingOrder.medications
 			val medicationsState = MedicationsState(medications)
 			show(medicationsState)
 

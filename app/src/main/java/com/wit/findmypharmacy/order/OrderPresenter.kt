@@ -39,7 +39,7 @@ class OrderPresenter @Inject constructor(
 	private fun onCheckOutClicked() {
 		val ordersDatabaseModel = orderRepository.get()
 		val previousOrderFromPharmacyExists = ordersDatabaseModel.any {
-			it.pharmacyApiModelId == nearestPharmacy.id
+			it.pharmacyId == nearestPharmacy.id
 		}
 
 		if (previousOrderFromPharmacyExists) {

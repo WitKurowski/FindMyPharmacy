@@ -25,7 +25,7 @@ class PharmacyListPresenter @Inject constructor(
 		val orders = orderRepository.get()
 		val pharmacyUiStates = pharmacies.map { pharmacy ->
 			val checked = orders.any {
-				it.pharmacyApiModelId == pharmacy.id
+				it.pharmacyId == pharmacy.id
 			}
 			val id = pharmacy.id
 			val name = pharmacy.name

@@ -1,7 +1,7 @@
 package com.wit.findmypharmacy.pharmacy.list
 
 import com.wit.findmypharmacy.TestData
-import com.wit.findmypharmacy.model.OrderDatabaseModel
+import com.wit.findmypharmacy.model.Order
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
 import org.greenrobot.eventbus.EventBus
@@ -91,13 +91,12 @@ class PharmacyListPresenterUnitTest {
 				.given(pharmacyRepository.get()) //
 				.willReturn(pharmacyApiModels)
 
-		val orderDatabaseModel1 =
-			OrderDatabaseModel(TestData.pharmacyId2, listOf("Abelcet", "Abilify"))
-		val orderDatabaseModel2 = OrderDatabaseModel(TestData.pharmacyId3, listOf("Acarbose"))
-		val orderDatabaseModels = listOf(orderDatabaseModel1, orderDatabaseModel2)
+		val order1 = Order(TestData.pharmacyId2, listOf("Abelcet", "Abilify"))
+		val order2 = Order(TestData.pharmacyId3, listOf("Acarbose"))
+		val orders = listOf(order1, order2)
 		BDDMockito //
 				.given(orderRepository.get()) //
-				.willReturn(orderDatabaseModels)
+				.willReturn(orders)
 
 		pharmacyListPresenter.onInternal(StartedEvent)
 
