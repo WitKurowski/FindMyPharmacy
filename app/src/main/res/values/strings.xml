@@ -12,7 +12,7 @@
 	<string name="successfully_submitted_order">Successfully submitted order.</string>
 
 	<!-- Strings used for fragments for navigation -->
-	<string name="order_fragment_label">Order Fragment</string>
+	<string name="order_fragment_label">Order</string>
 	<string name="pharmacy_list_fragment_label">Find My Pharmacy</string>
 	<string name="pharmacy_info_fragment_label">Pharmacy Details</string>
 </resources>
