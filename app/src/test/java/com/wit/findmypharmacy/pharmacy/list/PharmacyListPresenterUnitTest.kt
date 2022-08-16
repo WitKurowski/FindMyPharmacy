@@ -1,9 +1,12 @@
 package com.wit.findmypharmacy.pharmacy.list
 
+import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.TestData
+import com.wit.findmypharmacy.api.PharmacyApi
 import com.wit.findmypharmacy.model.Order
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
+import okhttp3.ResponseBody
 import org.greenrobot.eventbus.EventBus
 import org.junit.Before
 import org.junit.Test
@@ -11,6 +14,9 @@ import org.junit.runner.RunWith
 import org.mockito.BDDMockito
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import retrofit2.HttpException
+import retrofit2.Response
+import java.net.HttpURLConnection
 
 @RunWith(MockitoJUnitRunner::class)
 class PharmacyListPresenterUnitTest {
@@ -123,6 +129,39 @@ class PharmacyListPresenterUnitTest {
 		BDDMockito //
 				.verify(stateEventBus) //
 				.post(pharmaciesState)
+
+		val progressIndicatorState2 = ProgressIndicatorState(visible = false)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(progressIndicatorState2)
+	}
+
+	/**
+	 * Scenario:
+	 * - failure to load pharmacies
+	 */
+	@Test
+	fun testStartedEvent3() {
+		val responseBody = ResponseBody.create(null, "")
+		val response = Response.error<PharmacyApi.PharmacyResponse>(
+				HttpURLConnection.HTTP_NOT_FOUND, responseBody
+		)
+		val httpException = HttpException(response)
+		BDDMockito //
+				.given(pharmacyRepository.get()) //
+				.willThrow(httpException)
+
+		pharmacyListPresenter.onInternal(StartedEvent)
+
+		val progressIndicatorState1 = ProgressIndicatorState(visible = true)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(progressIndicatorState1)
+
+		val toastState = ToastState(R.string.failed_to_retrieve_pharmacy_and_order_data)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(toastState)
 
 		val progressIndicatorState2 = ProgressIndicatorState(visible = false)
 		BDDMockito //

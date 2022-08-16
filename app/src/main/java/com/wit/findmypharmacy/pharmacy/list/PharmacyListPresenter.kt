@@ -1,9 +1,11 @@
 package com.wit.findmypharmacy.pharmacy.list
 
+import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Presenter
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
 import org.greenrobot.eventbus.EventBus
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class PharmacyListPresenter @Inject constructor(
@@ -20,19 +22,24 @@ class PharmacyListPresenter @Inject constructor(
 	private fun onStartedEvent() {
 		showProgressIndicatorState(visible = true)
 
-		// TODO: Perform these 2 calls simultaneously with coroutines
-		val pharmacies = pharmacyRepository.get()
-		val orders = orderRepository.get()
-		val pharmacyUiStates = pharmacies.map { pharmacy ->
-			val checked = orders.any {
-				it.pharmacyId == pharmacy.id
+		try {
+			// TODO: Perform these 2 calls simultaneously with coroutines
+			val pharmacies = pharmacyRepository.get()
+			val orders = orderRepository.get()
+			val pharmacyUiStates = pharmacies.map { pharmacy ->
+				val checked = orders.any {
+					it.pharmacyId == pharmacy.id
+				}
+				val id = pharmacy.id
+				val name = pharmacy.name
+				PharmacyUiState(checked, id, name)
 			}
-			val id = pharmacy.id
-			val name = pharmacy.name
-			PharmacyUiState(checked, id, name)
+			val pharmaciesState = PharmaciesState(pharmacyUiStates)
+			show(pharmaciesState)
+		} catch (httpException: HttpException) {
+			val toastState = ToastState(R.string.failed_to_retrieve_pharmacy_and_order_data)
+			show(toastState)
 		}
-		val pharmaciesState = PharmaciesState(pharmacyUiStates)
-		show(pharmaciesState)
 
 		showProgressIndicatorState(visible = false)
 	}

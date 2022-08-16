@@ -1,6 +1,7 @@
 <resources>
 	<string name="app_name">Find My Pharmacy</string>
 	<string name="check_out">Check out</string>
+	<string name="failed_to_retrieve_pharmacy_and_order_data">Failed to retrieve pharmacy and order data.</string>
 	<string name="home">Home</string>
 	<string name="hours_label">Hours: </string>
 	<string name="no_medications_selected">Please select one or more medications.</string>
