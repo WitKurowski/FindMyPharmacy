@@ -138,10 +138,9 @@ class PharmacyListPresenterUnitTest {
 	 */
 	@Test
 	fun testStartedEvent3() {
-		val httpException = ExceptionUtils.generateHttpException()
 		BDDMockito //
 				.given(pharmacyRepository.get()) //
-				.willThrow(httpException)
+				.willThrow(ExceptionUtils.HTTP_EXCEPTION)
 
 		pharmacyListPresenter.onInternal(StartedEvent)
 

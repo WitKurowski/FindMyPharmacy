@@ -6,13 +6,9 @@ import retrofit2.Response
 import java.net.HttpURLConnection
 
 object ExceptionUtils {
-	fun generateHttpException(): HttpException {
-		val responseBody = ResponseBody.create(null, "")
-		val response = Response.error<Any>(
-				HttpURLConnection.HTTP_NOT_FOUND, responseBody
-		)
-		val httpException = HttpException(response)
-
-		return httpException
-	}
+	private val RESPONSE_BODY = ResponseBody.create(null, "")
+	private val RESPONSE = Response.error<Any>(
+			HttpURLConnection.HTTP_NOT_FOUND, RESPONSE_BODY
+	)
+	val HTTP_EXCEPTION = HttpException(RESPONSE)
 }
