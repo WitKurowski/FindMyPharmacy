@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.*
@@ -60,6 +62,7 @@ class PharmacyInfoFragment :
 					state.address, state.hours, state.name, state.phoneNumber
 			)
 			is ProgressIndicatorState -> showProgressIndicatorState(state.visible)
+			is ToastState -> showToastState(state.messageStringResId)
 		}
 	}
 
@@ -88,6 +91,10 @@ class PharmacyInfoFragment :
 
 	private fun showProgressIndicatorState(visible: Boolean) {
 		binding.progressIndicator.isVisible = visible
+	}
+
+	private fun showToastState(@StringRes messageStringResId: Int) {
+		Toast.makeText(context, messageStringResId, Toast.LENGTH_LONG).show()
 	}
 
 	private class MedicationAdapter :

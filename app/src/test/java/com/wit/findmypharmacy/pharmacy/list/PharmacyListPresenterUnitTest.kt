@@ -2,11 +2,10 @@ package com.wit.findmypharmacy.pharmacy.list
 
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.TestData
-import com.wit.findmypharmacy.api.PharmacyApi
 import com.wit.findmypharmacy.model.Order
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
-import okhttp3.ResponseBody
+import com.wit.findmypharmacy.util.ExceptionUtils
 import org.greenrobot.eventbus.EventBus
 import org.junit.Before
 import org.junit.Test
@@ -14,9 +13,6 @@ import org.junit.runner.RunWith
 import org.mockito.BDDMockito
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import retrofit2.HttpException
-import retrofit2.Response
-import java.net.HttpURLConnection
 
 @RunWith(MockitoJUnitRunner::class)
 class PharmacyListPresenterUnitTest {
@@ -138,15 +134,11 @@ class PharmacyListPresenterUnitTest {
 
 	/**
 	 * Scenario:
-	 * - failure to load pharmacies
+	 * - retrieving pharmacies fails with HttpException
 	 */
 	@Test
 	fun testStartedEvent3() {
-		val responseBody = ResponseBody.create(null, "")
-		val response = Response.error<PharmacyApi.PharmacyResponse>(
-				HttpURLConnection.HTTP_NOT_FOUND, responseBody
-		)
-		val httpException = HttpException(response)
+		val httpException = ExceptionUtils.generateHttpException()
 		BDDMockito //
 				.given(pharmacyRepository.get()) //
 				.willThrow(httpException)

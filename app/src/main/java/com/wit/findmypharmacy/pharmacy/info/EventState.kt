@@ -1,5 +1,7 @@
 package com.wit.findmypharmacy.pharmacy.info
 
+import androidx.annotation.StringRes
+
 sealed class Event
 
 data class StartedEvent(val pharmacyId: String) : Event()
@@ -17,3 +19,5 @@ data class PharmacyState(
 ) : State()
 
 data class ProgressIndicatorState(val visible: Boolean) : State()
+
+data class ToastState(@StringRes val messageStringResId: Int) : State()

@@ -1,9 +1,11 @@
 package com.wit.findmypharmacy.pharmacy.info
 
+import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.TestData
 import com.wit.findmypharmacy.model.Order
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
+import com.wit.findmypharmacy.util.ExceptionUtils
 import org.greenrobot.eventbus.EventBus
 import org.junit.Before
 import org.junit.Test
@@ -202,6 +204,56 @@ class PharmacyInfoPresenterUnitTest {
 		BDDMockito //
 				.verify(stateEventBus) //
 				.post(orderedMedicationsLabelState2)
+
+		val progressIndicatorState2 = ProgressIndicatorState(visible = false)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(progressIndicatorState2)
+	}
+
+	/**
+	 * Scenario:
+	 * - retrieving pharmacy fails with HttpException
+	 * - retrieving orders fails with HttpException
+	 */
+	@Test
+	fun testStartedEvent4() {
+		val httpException = ExceptionUtils.generateHttpException()
+		BDDMockito //
+				.given(pharmacyRepository.get(TestData.pharmacyId3)) //
+				.willThrow(httpException)
+
+		BDDMockito //
+				.given(orderRepository.get()) //
+				.willThrow(httpException)
+
+		val startedEvent = StartedEvent(TestData.pharmacyId3)
+		pharmacyInfoPresenter.onInternal(startedEvent)
+
+		val progressIndicatorState1 = ProgressIndicatorState(visible = true)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(progressIndicatorState1)
+
+		val hoursLabelState = HoursLabelState(visible = false)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(hoursLabelState)
+
+		val orderedMedicationsLabelState1 = OrderedMedicationsLabelState(visible = false)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(orderedMedicationsLabelState1)
+
+		val toastState1 = ToastState(R.string.failed_to_retrieve_pharmacy)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(toastState1)
+
+		val toastState2 = ToastState(R.string.failed_to_retrieve_order_history)
+		BDDMockito //
+				.verify(stateEventBus) //
+				.post(toastState2)
 
 		val progressIndicatorState2 = ProgressIndicatorState(visible = false)
 		BDDMockito //

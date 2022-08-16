@@ -5,6 +5,7 @@
 	<string name="failed_to_retrieve_order_history">Failed to retrieve order history.</string>
 	<string name="failed_to_retrieve_pharmacies">Failed to retrieve pharmacies.</string>
 	<string name="failed_to_retrieve_pharmacies_and_orders">Failed to retrieve pharmacies and orders.</string>
+	<string name="failed_to_retrieve_pharmacy">Failed to retrieve pharmacy.</string>
 	<string name="failed_to_submit_order">Failed to submit order.</string>
 	<string name="home">Home</string>
 	<string name="hours_label">Hours: </string>
