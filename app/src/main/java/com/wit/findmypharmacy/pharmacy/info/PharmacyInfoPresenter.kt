@@ -7,6 +7,7 @@ import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
 import org.greenrobot.eventbus.EventBus
 import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 class PharmacyInfoPresenter @Inject constructor(
@@ -53,6 +54,8 @@ class PharmacyInfoPresenter @Inject constructor(
 			show(updatedHoursLabelState)
 		} catch (httpException: HttpException) {
 			showToastState(R.string.failed_to_retrieve_pharmacy)
+		} catch (ioException: IOException) {
+			showToastState(R.string.failed_to_retrieve_pharmacy)
 		}
 
 		try {
@@ -69,6 +72,8 @@ class PharmacyInfoPresenter @Inject constructor(
 				showOrderedMedicationsLabelState(visible = true)
 			}
 		} catch (httpException: HttpException) {
+			showToastState(R.string.failed_to_retrieve_order_history)
+		} catch (ioException: IOException) {
 			showToastState(R.string.failed_to_retrieve_order_history)
 		}
 

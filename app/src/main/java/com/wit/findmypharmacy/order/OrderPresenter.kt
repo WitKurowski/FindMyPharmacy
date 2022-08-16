@@ -11,6 +11,7 @@ import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
 import org.greenrobot.eventbus.EventBus
 import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 class OrderPresenter @Inject constructor(
@@ -68,12 +69,16 @@ class OrderPresenter @Inject constructor(
 						show(PharmacyListState)
 					} catch (httpException: HttpException) {
 						showToastState(R.string.failed_to_submit_order)
+					} catch (ioException: IOException) {
+						showToastState(R.string.failed_to_submit_order)
 					}
 				} else {
 					showToastState(R.string.no_medications_selected)
 				}
 			}
 		} catch (httpException: HttpException) {
+			showToastState(R.string.failed_to_retrieve_order_history)
+		} catch (ioException: IOException) {
 			showToastState(R.string.failed_to_retrieve_order_history)
 		}
 	}
@@ -117,6 +122,8 @@ class OrderPresenter @Inject constructor(
 			show(pharmacyNameState)
 		} catch (httpException: HttpException) {
 			showToastState(R.string.failed_to_retrieve_pharmacies)
+		} catch (ioException: IOException) {
+			showToastState(R.string.failed_to_retrieve_pharmacies)
 		}
 
 		try {
@@ -130,6 +137,8 @@ class OrderPresenter @Inject constructor(
 
 			showMedicationsState()
 		} catch (httpException: HttpException) {
+			showToastState(R.string.failed_to_retrieve_medications)
+		} catch (ioException: IOException) {
 			showToastState(R.string.failed_to_retrieve_medications)
 		}
 

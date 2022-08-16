@@ -1,11 +1,13 @@
 package com.wit.findmypharmacy.pharmacy.list
 
+import androidx.annotation.StringRes
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Presenter
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
 import org.greenrobot.eventbus.EventBus
 import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 class PharmacyListPresenter @Inject constructor(
@@ -37,8 +39,9 @@ class PharmacyListPresenter @Inject constructor(
 			val pharmaciesState = PharmaciesState(pharmacyUiStates)
 			show(pharmaciesState)
 		} catch (httpException: HttpException) {
-			val toastState = ToastState(R.string.failed_to_retrieve_pharmacies_and_orders)
-			show(toastState)
+			showToastState(R.string.failed_to_retrieve_pharmacies_and_orders)
+		} catch (ioException: IOException) {
+			showToastState(R.string.failed_to_retrieve_pharmacies_and_orders)
 		}
 
 		showProgressIndicatorState(visible = false)
@@ -47,5 +50,10 @@ class PharmacyListPresenter @Inject constructor(
 	private fun showProgressIndicatorState(visible: Boolean) {
 		val progressIndicatorState = ProgressIndicatorState(visible)
 		show(progressIndicatorState)
+	}
+
+	private fun showToastState(@StringRes messageStringResId: Int) {
+		val toastState = ToastState(messageStringResId)
+		show(toastState)
 	}
 }
