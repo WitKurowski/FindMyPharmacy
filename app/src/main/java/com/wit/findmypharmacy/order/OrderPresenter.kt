@@ -10,6 +10,7 @@ import com.wit.findmypharmacy.repository.MedicationRepository
 import com.wit.findmypharmacy.repository.OrderRepository
 import com.wit.findmypharmacy.repository.PharmacyRepository
 import org.greenrobot.eventbus.EventBus
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class OrderPresenter @Inject constructor(
@@ -84,36 +85,44 @@ class OrderPresenter @Inject constructor(
 	private fun onStartedEvent() {
 		showProgressIndicatorState(visible = true)
 
-		val pharmacies = pharmacyRepository.get()
-		val results = FloatArray(1)
-		nearestPharmacy = pharmacies.minByOrNull {
-			val address = it.address
-			val latitude = address.latitude
-			val longitude = address.longitude
+		try {
+			val pharmacies = pharmacyRepository.get()
+			val results = FloatArray(1)
+			nearestPharmacy = pharmacies.minByOrNull {
+				val address = it.address
+				val latitude = address.latitude
+				val longitude = address.longitude
 
-			// TODO: Extract into injected class to allow for unit tests.
-			Location.distanceBetween(
-					CURRENT_LOCATION_LATITUDE,
-					CURRENT_LOCATION_LONGITUDE,
-					latitude,
-					longitude,
-					results
-			)
+				// TODO: Extract into injected class to more easily allow for unit tests.
+				Location.distanceBetween(
+						CURRENT_LOCATION_LATITUDE,
+						CURRENT_LOCATION_LONGITUDE,
+						latitude,
+						longitude,
+						results
+				)
 
-			results[0]
-		}!!
-		val pharmacyNameState = PharmacyNameState(nearestPharmacy.name)
-		show(pharmacyNameState)
-
-		val medications = medicationRepository.get()
-
-		medications.forEach {
-			val name = it.name
-			val medicationUiState = MedicationUiState(checked = false, name = name)
-			medicationUiStates.add(medicationUiState)
+				results[0]
+			}!!
+			val pharmacyNameState = PharmacyNameState(nearestPharmacy.name)
+			show(pharmacyNameState)
+		} catch (httpException: HttpException) {
+			showToastState(R.string.failed_to_retrieve_pharmacies)
 		}
 
-		showMedicationsState()
+		try {
+			val medications = medicationRepository.get()
+
+			medications.forEach {
+				val name = it.name
+				val medicationUiState = MedicationUiState(checked = false, name = name)
+				medicationUiStates.add(medicationUiState)
+			}
+
+			showMedicationsState()
+		} catch (httpException: HttpException) {
+			showToastState(R.string.failed_to_retrieve_medications)
+		}
 
 		showProgressIndicatorState(visible = false)
 	}

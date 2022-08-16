@@ -37,7 +37,7 @@ class PharmacyListPresenter @Inject constructor(
 			val pharmaciesState = PharmaciesState(pharmacyUiStates)
 			show(pharmaciesState)
 		} catch (httpException: HttpException) {
-			val toastState = ToastState(R.string.failed_to_retrieve_pharmacy_and_order_data)
+			val toastState = ToastState(R.string.failed_to_retrieve_pharmacies_and_orders)
 			show(toastState)
 		}
 

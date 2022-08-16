@@ -158,7 +158,7 @@ class PharmacyListPresenterUnitTest {
 				.verify(stateEventBus) //
 				.post(progressIndicatorState1)
 
-		val toastState = ToastState(R.string.failed_to_retrieve_pharmacy_and_order_data)
+		val toastState = ToastState(R.string.failed_to_retrieve_pharmacies_and_orders)
 		BDDMockito //
 				.verify(stateEventBus) //
 				.post(toastState)
