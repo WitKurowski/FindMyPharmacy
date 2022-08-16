@@ -59,11 +59,16 @@ class OrderPresenter @Inject constructor(
 					val checkedMedications = checkedMedicationUiStates.map {
 						it.name
 					}
-					orderRepository.order(pharmacyApiModelId, checkedMedications)
 
-					showToastState(R.string.successfully_submitted_order)
+					try {
+						orderRepository.order(pharmacyApiModelId, checkedMedications)
 
-					show(PharmacyListState)
+						showToastState(R.string.successfully_submitted_order)
+
+						show(PharmacyListState)
+					} catch (httpException: HttpException) {
+						showToastState(R.string.failed_to_submit_order)
+					}
 				} else {
 					showToastState(R.string.no_medications_selected)
 				}
