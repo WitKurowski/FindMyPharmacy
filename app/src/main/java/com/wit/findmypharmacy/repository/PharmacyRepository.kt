@@ -1,15 +1,14 @@
 package com.wit.findmypharmacy.repository
 
-import com.wit.findmypharmacy.api.PharmacyApi
 import com.wit.findmypharmacy.api.model.PharmacyApiModel
+import com.wit.findmypharmacy.datasource.remote.PharmacyRemoteDataSource
 import com.wit.findmypharmacy.model.Pharmacy
-import retrofit2.HttpException
 import javax.inject.Inject
 
 /**
  * The repository providing all functionality related to pharmacies.
  */
-class PharmacyRepository @Inject constructor(private val pharmacyApi: PharmacyApi) {
+class PharmacyRepository @Inject constructor(private val pharmacyRemoteDataSource: PharmacyRemoteDataSource) {
 	private fun convert(addressApiModel: PharmacyApiModel.AddressApiModel): Pharmacy.Address {
 		val city = addressApiModel.city
 		val latitude = addressApiModel.latitude
@@ -56,20 +55,12 @@ class PharmacyRepository @Inject constructor(private val pharmacyApi: PharmacyAp
 
 	/**
 	 * Searches for a specific pharmacy by ID.
+	 *
 	 * @param id The ID of the pharmacy to search for.
 	 * @return The pharmacy matching the ID.
 	 */
 	fun get(id: String): Pharmacy {
-		// TODO: Extract into PharmacyRemoteDataSource class.
-		// TODO: Handle errors such as when the network is unavailable or the ID is invalid.
-		val call = pharmacyApi.getPharmacy(id)
-		val response = call.execute()
-		val pharmacyApiModel = if (response.isSuccessful) {
-			val pharmacyResponse = response.body()!!
-			pharmacyResponse.pharmacyApiModel
-		} else {
-			throw HttpException(response)
-		}
+		val pharmacyApiModel = pharmacyRemoteDataSource.get(id)
 		val pharmacy = convert(pharmacyApiModel)
 
 		return pharmacy
