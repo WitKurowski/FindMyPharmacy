@@ -2,6 +2,7 @@ package com.wit.findmypharmacy.order
 
 import android.location.Location
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import com.wit.findmypharmacy.R
 import com.wit.findmypharmacy.core.Presenter
 import com.wit.findmypharmacy.model.PharmacyApiModel
@@ -24,7 +25,8 @@ class OrderPresenter @Inject constructor(
 
 	private val medicationUiStates = mutableListOf<MedicationUiState>()
 
-	private lateinit var nearestPharmacyApiModel: PharmacyApiModel
+	@VisibleForTesting
+	lateinit var nearestPharmacyApiModel: PharmacyApiModel
 
 	override fun on(event: Event) {
 		when (event) {
@@ -88,6 +90,8 @@ class OrderPresenter @Inject constructor(
 			val addressApiModel = it.addressApiModel
 			val latitude = addressApiModel.latitude
 			val longitude = addressApiModel.longitude
+
+			// TODO: Extract into injected class to allow for unit tests.
 			Location.distanceBetween(
 					CURRENT_LOCATION_LATITUDE,
 					CURRENT_LOCATION_LONGITUDE,

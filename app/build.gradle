@@ -63,6 +63,10 @@ dependencies {
 	implementation "com.google.dagger:hilt-android:$hilt_version"
 	kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
+	// Mockito
+	def mockito_version = "4.7.0"
+	testImplementation "org.mockito:mockito-core:$mockito_version"
+
 	// Navigation
 	def navigation_version = "2.5.1"
 	implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
