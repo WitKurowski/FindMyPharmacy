@@ -35,4 +35,4 @@ Other areas of improvements:
 - If the user was paying for the medications being ordered, having an intermediary verification
   screen that shows just the selected medications would be helpful.
 - Adding unit tests for other layers of the app, such as for the repository classes.
-- The selected FAB and menu icons are not colored correctly.
+- Fix the coloring of the FAB and menu icons.
